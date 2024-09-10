@@ -41,7 +41,9 @@ tieneCaraRedonda(Persona):-not(persona(Persona, cara(puntuda))).
 
 
 % 3. Se necesita saber el conjunto de todos los rubios de boca chica.
-
+rubiosDeBocaChica(Personas) :- 
+    findall(Persona, (persona(Persona, pelo(rubio, _)), 
+                       persona(Persona, boca(chica))), Personas).
 
 % 4. Ahora agregamos a la base las pistas que va obteniendo el jugador.
 % Por ejemplo:
@@ -49,6 +51,38 @@ tieneCaraRedonda(Persona):-not(persona(Persona, cara(puntuda))).
 % pista(rojo,boca(chica)).
 % Con dicho predicado, queremos relacionar una persona y un jugador solo si todas las pistas que tiene el jugador,
 % son características de la persona. En este punto no se puede usar findall.
+
+%---- Predicados creados para jugar con las funciones y que no salgan varias respuestas iguales
+pista(rojo, pelo(rubio,_)).
+pista(rojo, boca(chica)).
+
+jugadores(samuel).
+jugadores(pepe).
+jugadores(juan).
+
+persona(juan, boca(chica)).
+persona(juan, pelo(rubio, lacio)).
+carta(rojo, juan).
+
+/*
+sonCaracteristicas(Persona):- jugadores(Persona),
+    forall(pista(_,Caracteristica), persona(Persona, Caracteristica)).
+
+ Ejemplo: sonCaracteristicas(Quien).
+			Quien = pepe
+			Quien = juan
+*/	
+
+cumpleCaracteristicas(Color, Persona):- carta(Color, Persona),
+    forall(pista(_,Caracteristica), persona(Persona, Caracteristica)).
+
+
+/* Ejemplo: cumpleCaracteristicas(azul, Quien).
+			Quien = pepe
+			----------------------------------
+            cumpleCaracteristicas(rojo, Quien).
+			Quien = juan
+*/
 
 
 
