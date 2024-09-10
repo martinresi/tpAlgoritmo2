@@ -41,7 +41,9 @@ persona(Persona,cara(redonda)):-not(persona(Persona, cara(puntuda))).
 
 
 % 3. Se necesita saber el conjunto de todos los rubios de boca chica.
-
+rubiosDeBocaChica(Personas) :- 
+    findall(Persona, (persona(Persona, pelo(rubio, _)), 
+                       persona(Persona, boca(chica))), Personas).
 
 % 4. Ahora agregamos a la base las pistas que va obteniendo el jugador.
 % Por ejemplo:
