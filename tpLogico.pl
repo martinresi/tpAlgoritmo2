@@ -81,3 +81,21 @@ estaGanando(Color) :-
     cantidadPersonasQueCumplen(Color, CantidadColor),
     cantidadPersonasQueCumplen(Contrincante, CantidadContrincante),
     CantidadColor < CantidadContrincante.
+
+
+% PUNTO 1
+
+:- begin_tests(esCalvo).
+test("esCalvo",nondet) :-esCalvo(rojo). 
+test("esCalvo", fail) :-esCalvo(azul). 
+:- end_tests(esCalvo).
+
+:- begin_tests(esRubio).
+test("esRubio",nondet) :-esRubio(azul).
+test("esRubio",nondet) :-esRubio(azul).  
+:- end_tests(esRubio).
+
+:- begin_tests(tieneLentes).
+test("tieneLentes",nondet) :-tieneLentes(azul).
+test("tieneLentes",fail) :-tieneLentes(negro).
+:- end_tests(tieneLentes).
