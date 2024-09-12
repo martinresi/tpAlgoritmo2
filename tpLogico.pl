@@ -43,7 +43,7 @@ tieneLentesYBocaGrande(Persona):- persona(Persona, nariz(chica)), persona(Person
 % ATTENTION: ninguno cumple
 tieneOjosMarrones(Persona):-persona(Persona,pelo(morocha,_)).
 tieneOjosMarrones(Persona):-persona(Persona,pelo(castania,_)).
-
+tieneOjosMarrones(Persona):-persona(Persona,ojos(marrones)).
 % c. Los que no tienen la cara puntuda, tienen la cara redonda.
 % ATTENTION: ninguno cumple
 tieneCaraRedonda(Persona):-not(persona(Persona, cara(puntuda))).
