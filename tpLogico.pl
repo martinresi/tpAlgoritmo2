@@ -36,16 +36,14 @@ tieneLentes(Color):-carta(Color,Persona),persona(Persona,lentes(_)).
 
 % 2. Sabemos que las personas:
 % a. Que tienen nariz chica y boca grande, tienen lentes (el color del lente podemos asumirlo que es marrón).
-% ATTENTION: ninguno cumple
 tieneLentesYBocaGrande(Persona):- persona(Persona, nariz(chica)), persona(Persona, boca(grande)).
 
 % b. Que son morochas o castañas, tienen ojos marrones.
-% ATTENTION: ninguno cumple
 tieneOjosMarrones(Persona):-persona(Persona,pelo(morocha,_)).
 tieneOjosMarrones(Persona):-persona(Persona,pelo(castania,_)).
 tieneOjosMarrones(Persona):-persona(Persona,ojos(marrones)).
+
 % c. Los que no tienen la cara puntuda, tienen la cara redonda.
-% ATTENTION: ninguno cumple
 tieneCaraRedonda(Persona):-not(persona(Persona, cara(puntuda))).
 
 % Realizar el predicado que nos permita agregar este conocimiento y el punto 1 no deba modificarse.
