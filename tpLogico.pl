@@ -122,9 +122,9 @@ test("rubiosDeBocaChica", set(Personas == [pepe])) :-
     rubiosDeBocaChica(Personas).
 
 test("pepe es rubio de boca chica", nondet) :- 
-    rubiosDeBocaChica([pepe]).
+    rubiosDeBocaChica(pepe).
 
 test("Samuel no es rubio de boca chica", fail) :-
-    rubiosDeBocaChica([samuel]).
+    rubiosDeBocaChica(samuel).
 
 :- end_tests(rubiosDeBocaChica).
