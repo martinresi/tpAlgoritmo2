@@ -65,6 +65,8 @@ rubiosDeBocaChica(Personas) :-
 sonCaracteristicas(Persona):- jugadores(Persona),
     forall(pista(_,Caracteristica), persona(Persona, Caracteristica)).
 
+% Las 2 funciones son iguales, solo que una es mas especifica que la otra. 
+
 cumpleCaracteristicas(Color, Persona):- carta(Color, Persona),
     forall(pista(_,Caracteristica), persona(Persona, Caracteristica)).
 
@@ -128,3 +130,13 @@ test("Samuel no es rubio de boca chica", fail) :-
     rubiosDeBocaChica(samuel).
 
 :- end_tests(rubiosDeBocaChica).
+
+% PUNTO 4
+
+:- begin_tests(buscandoPistas).
+test("cumpleCaracteristicas", fail) :- cumpleCaracteristicas(rojo, samuel).
+:- end_tests(buscandoPistas).
+
+:- begin_tests(buscandoPistas).
+test("sonCaracteristicas", fail) :- sonCaracteristicas(samuel).
+:- end_tests(buscandoPistas).
