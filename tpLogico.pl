@@ -113,3 +113,18 @@ test("tieneOjosMarrones", fail) :-tieneOjosMarrones(juan).
 test("tieneCaraRedonda", nondet) :-tieneCaraRedonda(juan).
 test("tieneCaraRedonda", fail) :-tieneCaraRedonda(samuel).
 :- end_tests(tieneCaraRedonda).
+
+% PUNTO 3
+
+:- begin_tests(rubiosDeBocaChica).
+
+test("rubiosDeBocaChica", set(Personas == [pepe])) :-
+    rubiosDeBocaChica(Personas).
+
+test("pepe es rubio de boca chica", nondet) :- 
+    rubiosDeBocaChica([pepe]).
+
+test("Samuel no es rubio de boca chica", fail) :-
+    rubiosDeBocaChica([samuel]).
+
+:- end_tests(rubiosDeBocaChica).
