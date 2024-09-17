@@ -140,3 +140,10 @@ test("cumpleCaracteristicas", fail) :- cumpleCaracteristicas(rojo, samuel).
 :- begin_tests(buscandoPistas).
 test("sonCaracteristicas", fail) :- sonCaracteristicas(samuel).
 :- end_tests(buscandoPistas).
+
+% PUNTO 5
+
+:- begin_tests(estaGanando).
+test("Esta Ganando", nondet) :- estaGanando(rojo).
+test("Esta Ganando", fail) :- estaGanando(azul).
+:- end_tests(estaGanando).
