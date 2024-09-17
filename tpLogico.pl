@@ -73,7 +73,7 @@ cumpleCaracteristicas(Color, Persona):- carta(Color, Persona),
 % 5. Por último queremos saber si un color está ganándole a su contrincante. Para eso, 
 % las personas que cumplen las pistas, deben ser menos que las personas que cumplen las pistas de su contrincante.
 
-cantidadPersonasQueCumplen(Color, Cantidad) :-
+cantidadCumplen(Color, Cantidad) :-
     findall(Persona, cumpleCaracteristicas(Color, Persona), Personas),
     length(Personas, Cantidad).
 
