@@ -15,7 +15,7 @@ persona(juan, boca(chica)).
 persona(juan, pelo(rubio, lacio)).
 carta(rojo, samuel).
 carta(azul, pepe).
-carta(rojo, juan).
+% carta(rojo, juan).
 contrincante(rojo, azul).
 contrincante(azul, rojo).
 pista(rojo,pelo(rubio,_)).
@@ -79,10 +79,9 @@ cantidadPersonasQueCumplen(Color, Cantidad) :-
 
 estaGanando(Color) :-
     contrincante(Color, Contrincante),
-    cantidadPersonasQueCumplen(Color, CantidadColor),
-    cantidadPersonasQueCumplen(Contrincante, CantidadContrincante),
-    CantidadColor < CantidadContrincante.
-
+    cantidadQueCumplen(Color, CantidadColor),
+    cantidadQueCumplen(Contrincante, CantidadContrincante),
+    CantidadColor > CantidadContrincante.
 
 % PUNTO 1
 
@@ -144,6 +143,6 @@ test("sonCaracteristicas", fail) :- sonCaracteristicas(samuel).
 % PUNTO 5
 
 :- begin_tests(estaGanando).
-test("Esta Ganando el rojo") :- estaGanando(rojo).
-test("No esta Ganando el azul", fail) :- estaGanando(azul).
+test("Esta ganando el azul") :- estaGanando(azul).
+test("No esta ganando el rojo", fail) :- estaGanando(rojo).
 :- end_tests(estaGanando).
