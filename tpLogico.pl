@@ -119,15 +119,16 @@ test("tieneCaraRedonda", fail) :-tieneCaraRedonda(samuel).
 
 :- begin_tests(rubiosDeBocaChica).
 
-test("rubiosDeBocaChica", set(Personas == [pepe])) :-
-    rubiosDeBocaChica(Personas).
+test("rubiosDeBocaChica", [true(Personas == [pepe, juan])]) :-
+    rubiosDeBocaChica(Personas), !.
 
-test("pepe es rubio de boca chica", nondet) :- 
-    rubiosDeBocaChica(pepe).
+test("pepe es rubio de boca chica", true) :- 
+    rubiosDeBocaChica(Personas),
+    member(pepe, Personas), !.
 
 test("Samuel no es rubio de boca chica", fail) :-
-    rubiosDeBocaChica(samuel).
-
+    rubiosDeBocaChica(Personas),
+    member(samuel, Personas).
 :- end_tests(rubiosDeBocaChica).
 
 % PUNTO 4
