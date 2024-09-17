@@ -144,6 +144,6 @@ test("sonCaracteristicas", fail) :- sonCaracteristicas(samuel).
 % PUNTO 5
 
 :- begin_tests(estaGanando).
-test("Esta Ganando", nondet) :- estaGanando(rojo).
-test("Esta Ganando", fail) :- estaGanando(azul).
+test("Esta Ganando el rojo") :- estaGanando(rojo).
+test("No esta Ganando el azul", fail) :- estaGanando(azul).
 :- end_tests(estaGanando).
