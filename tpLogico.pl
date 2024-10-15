@@ -62,13 +62,11 @@ rubiosDeBocaChica(Personas) :-
 % son características de la persona. En este punto no se puede usar findall.
 
 
-sonCaracteristicas(Persona):- jugadores(Persona),
-    forall(pista(_,Caracteristica), persona(Persona, Caracteristica)).
-
-% Las 2 funciones son iguales, solo que una es mas especifica que la otra. 
+/*sonCaracteristicas(Persona, Color):- jugadores(Persona),
+    forall(pista(Color,Caracteristica), persona(Persona, Caracteristica)).*/ 
 
 cumpleCaracteristicas(Color, Persona):- carta(Color, Persona),
-    forall(pista(_,Caracteristica), persona(Persona, Caracteristica)).
+    forall(pista(Color,Caracteristica), persona(Persona, Caracteristica)).
 
 % 5. Por último queremos saber si un color está ganándole a su contrincante. Para eso, 
 % las personas que cumplen las pistas, deben ser menos que las personas que cumplen las pistas de su contrincante.
