@@ -35,17 +35,17 @@ esRubio(Color):-carta(Color,Persona),persona(Persona,pelo(rubio,_)).
 tieneLentes(Color):-carta(Color,Persona),persona(Persona,lentes(_)).
 
 % 2. Sabemos que las personas:
+%Salta error donde pide colocar los predicados creados al inicio de la base de conocimiento
 
 % a. Que tienen nariz chica y boca grande, tienen lentes (el color del lente podemos asumirlo que es marrón).
-tieneLentesYBocaGrande(Persona):- persona(Persona, nariz(chica)), persona(Persona, boca(grande)).
+persona(Persona, lentes(marrón)):- persona(Persona, nariz(chica)), persona(Persona, boca(grande)).
 
 % b. Que son morochas o castañas, tienen ojos marrones.
-tieneOjosMarrones(Persona):-persona(Persona,pelo(morocha,_)).
-tieneOjosMarrones(Persona):-persona(Persona,pelo(castania,_)).
-tieneOjosMarrones(Persona):-persona(Persona,ojos(marrones)).
+persona(Persona, ojos(marrones)):-persona(Persona,pelo(morocha,_)).
+persona(Persona, ojos(marrones)):-persona(Persona,pelo(castania,_)).
 
 % c. Los que no tienen la cara puntuda, tienen la cara redonda.
-tieneCaraRedonda(Persona):-not(persona(Persona, cara(puntuda))).
+persona(Persona, cara(redonda)):-not(persona(Persona, cara(puntuda))).
 
 % Realizar el predicado que nos permita agregar este conocimiento y el punto 1 no deba modificarse.
 % 3. Se necesita saber el conjunto de todos los rubios de boca chica.
