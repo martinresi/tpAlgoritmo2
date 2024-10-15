@@ -79,4 +79,4 @@ estaGanando(Color) :-
     contrincante(Color, Contrincante),
     cantidadQueCumplen(Color, CantidadColor),
     cantidadQueCumplen(Contrincante, CantidadContrincante),
-    CantidadColor > CantidadContrincante.
+    CantidadColor < CantidadContrincante.
