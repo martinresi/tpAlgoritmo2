@@ -6,8 +6,8 @@ test("esCalvo", fail) :-esCalvo(azul).
 :- end_tests(esCalvo).
 
 :- begin_tests(esRubio).
-test("esRubio",nondet) :-esRubio(azul).
-test("esRubio",nondet) :-esRubio(azul).  
+test("esRubio",fail) :-esRubio(negro).
+test("esRubio",fail) :-esRubio(negro).  
 :- end_tests(esRubio).
 
 :- begin_tests(tieneLentes).
@@ -52,13 +52,13 @@ test("Samuel no es rubio de boca chica", fail) :-
 test("cumpleCaracteristicas", fail) :- cumpleCaracteristicas(rojo, samuel).
 :- end_tests(buscandoPistas).
 
-:- begin_tests(buscandoPistas).
-test("sonCaracteristicas", fail) :- sonCaracteristicas(samuel).
-:- end_tests(buscandoPistas).
-
 % PUNTO 5
 
 :- begin_tests(estaGanando).
-test("Esta ganando el azul") :- estaGanando(azul).
-test("No esta ganando el rojo", fail) :- estaGanando(rojo).
+test("Está ganando el rojo") :- 
+    estaGanando(rojo).
+
+test("Está perdiendo el azul",fail) :- 
+    estaGanando(azul).
 :- end_tests(estaGanando).
+

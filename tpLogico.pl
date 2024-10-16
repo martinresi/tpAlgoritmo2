@@ -1,3 +1,4 @@
+:- discontiguous persona/2.
 persona(samuel, lentes(negros)).
 persona(samuel, pelo(blanco,lacio)).
 persona(samuel, calvo).
@@ -15,7 +16,6 @@ persona(juan, boca(chica)).
 persona(juan, pelo(rubio, lacio)).
 carta(rojo, samuel).
 carta(azul, pepe).
-% carta(rojo, juan).
 contrincante(rojo, azul).
 contrincante(azul, rojo).
 pista(rojo,pelo(rubio,_)).
@@ -35,10 +35,9 @@ esRubio(Color):-carta(Color,Persona),persona(Persona,pelo(rubio,_)).
 tieneLentes(Color):-carta(Color,Persona),persona(Persona,lentes(_)).
 
 % 2. Sabemos que las personas:
-%Salta error donde pide colocar los predicados creados al inicio de la base de conocimiento
 
 % a. Que tienen nariz chica y boca grande, tienen lentes (el color del lente podemos asumirlo que es marrón).
-persona(Persona, lentes(marrón)):- persona(Persona, nariz(chica)), persona(Persona, boca(grande)).
+persona(Persona, lentes(marron)):- persona(Persona, nariz(chica)), persona(Persona, boca(grande)).
 
 % b. Que son morochas o castañas, tienen ojos marrones.
 persona(Persona, ojos(marrones)):-persona(Persona,pelo(morocha,_)).
@@ -62,8 +61,6 @@ rubiosDeBocaChica(Personas) :-
 % son características de la persona. En este punto no se puede usar findall.
 
 
-/*sonCaracteristicas(Persona, Color):- jugadores(Persona),
-    forall(pista(Color,Caracteristica), persona(Persona, Caracteristica)).*/ 
 
 cumpleCaracteristicas(Color, Persona):- carta(Color, Persona),
     forall(pista(Color,Caracteristica), persona(Persona, Caracteristica)).
@@ -80,3 +77,4 @@ estaGanando(Color) :-
     cantidadQueCumplen(Color, CantidadColor),
     cantidadQueCumplen(Contrincante, CantidadContrincante),
     CantidadColor < CantidadContrincante.
+
