@@ -4,7 +4,7 @@ persona(samuel, pelo(blanco,lacio)).
 persona(samuel, calvo).
 persona(samuel, boca(chica)).
 persona(samuel, cara(puntuda)).
-persona(samuel,ojos(marrones)).
+persona(samuel, ojos(marrones)).
 persona(samuel, nariz(chica)).
 persona(pepe, lentes(rojos)).
 persona(pepe, pelo(rubio,rulos)).
@@ -14,6 +14,7 @@ persona(pepe, ojos(marrones)).
 persona(pepe, nariz(chica)).
 persona(juan, boca(chica)).
 persona(juan, pelo(rubio, lacio)).
+persona(juan, cara(redonda)).
 carta(rojo, samuel).
 carta(azul, pepe).
 contrincante(rojo, azul).
@@ -52,15 +53,12 @@ rubiosDeBocaChica(Personas) :-
     findall(Persona, (persona(Persona, pelo(rubio, _)), 
                        persona(Persona, boca(chica))), Personas).
 
-
 % 4. Ahora agregamos a la base las pistas que va obteniendo el jugador.
 % Por ejemplo:
 % pista(rojo,pelo(rubio,_)).
 % pista(rojo,boca(chica)).
 % Con dicho predicado, queremos relacionar una persona y un jugador solo si todas las pistas que tiene el jugador
 % son características de la persona. En este punto no se puede usar findall.
-
-
 
 cumpleCaracteristicas(Color, Persona):- carta(Color, Persona),
     forall(pista(Color,Caracteristica), persona(Persona, Caracteristica)).
