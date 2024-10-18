@@ -21,18 +21,21 @@ test("equipos_con_personas_con_lentes", set (Equipo = [rojo, azul])):- tieneLent
 
 % PUNTO 2
 
-:- begin_tests(tieneLentesYBocaGrande).
-test("tieneLentesYBocaGrande", fail) :-tieneLentesYBocaGrande(samuel).
-:- end_tests(tieneLentesYBocaGrande).
+:- begin_tests(personaConLentes).
+test("tieneLentes", fail) :- persona(pepe, lentes(marron)).
+:- end_tests(personaConLentes).
 
-:- begin_tests(tieneOjosMarrones).
-test("tieneOjosMarrones", fail) :-tieneOjosMarrones(juan).
-:- end_tests(tieneOjosMarrones).
+:- begin_tests(personaQueNoTieneOjosMarrones).
+test("noTieneOjosMarrones") :- persona(juan, ojos(marrones)).
+:- end_tests(personaQueNoTieneOjosMarrones).
 
-:- begin_tests(tieneCaraRedonda).
-test("tieneCaraRedonda", nondet) :-tieneCaraRedonda(juan).
-test("tieneCaraRedonda", fail) :-tieneCaraRedonda(samuel).
-:- end_tests(tieneCaraRedonda).
+:- begin_tests(personaConCaraRedonda).
+test("tieneCaraRedonda", nondet) :- persona(juan, cara(redonda)).
+:- end_tests(personaConCaraRedonda).
+
+:- begin_tests(verificar_Inversibilidad).
+test("personas_con_ojos_marrones", set (Persona = [samuel, pepe])):- persona(Persona, ojos(marrones)).
+:- end_tests(verificar_Inversibilidad).
 
 % PUNTO 3
 
