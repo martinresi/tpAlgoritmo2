@@ -15,6 +15,10 @@ test("tieneLentes",nondet) :-tieneLentes(azul).
 test("tieneLentes",fail) :-tieneLentes(negro).
 :- end_tests(tieneLentes).
 
+:- begin_tests(verificar_Inversibilidad).
+test("equipos_con_personas_con_lentes", set (Equipo = [rojo, azul])):- tieneLentes(Equipo).
+:- end_tests(verificar_Inversibilidad).
+
 % PUNTO 2
 
 :- begin_tests(tieneLentesYBocaGrande).
