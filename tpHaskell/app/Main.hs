@@ -4,7 +4,7 @@ import Lib
 
 -- 1
 
-data Mago = Mago{nombre::String, edad::Int, salud::Int, hechizos::[Hechizos]}
+data Mago = Mago{nombre::String, edad::Int, salud::Int, hechizos::[Hechizos]} deriving (Show, Eq)
 
 data Hechizos = LagrimaFenix {lagrimaFenixSalud::Int}
               | SectumSempra {sectumSempraDanio::Int}
@@ -29,7 +29,12 @@ diferenciaDePoder mago1 mago2 = abs (poder mago1 - poder mago2)
 --3
 type Academia = [Mago]
 --a
+hayMagoSinHechizos :: Academia -> Bool
+hayMagoSinHechizos = any (\mago -> nombre mago == "Hagrid" && null (hechizos mago))
 
 --b
+sonTodosViejosNionios :: Academia -> Bool
+sonTodosViejosNionios = all (\mago -> edad mago <= 16 || length (hechizos mago) > (edad mago * 3))
+
 main :: IO ()
 main = someFunc
