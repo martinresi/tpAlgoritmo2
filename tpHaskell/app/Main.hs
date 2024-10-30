@@ -24,8 +24,12 @@ danio mago (LagrimaFenix lagrimaFenixSalud) = salud mago - ( salud mago + lagrim
 
 --c
 -- diferenciaDePoder:: Mago -> Mago -> Int
-
+diferenciaDePoder mago1 mago2 = abs (poder mago1 - poder mago2)
 
 --3
+type Academia = [Mago]
+--a
+
+--b
 main :: IO ()
 main = someFunc
