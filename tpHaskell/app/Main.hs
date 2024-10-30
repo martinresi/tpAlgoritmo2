@@ -19,7 +19,12 @@ poder mago = salud mago + (edad mago * length (hechizos mago))
 --b
 danio:: Mago -> Hechizos -> Int
 -- a la salud del magoo total   le resto la que se cura  ATTENTION : a testear
-danio mago (LagrimaFenix lagrimaFenixSalud) = salud mago - ( salud mago + lagrimaFenixSalud )   
+danio mago (LagrimaFenix lagrimaFenixSalud) = salud mago - ( salud mago + lagrimaFenixSalud )  
+
+danio mago (LagrimaFenix vida) = -vida
+danio mago SectumSempra | salud mago > 10 = 10
+                        | otherwise = div (salud mago) 2
+
 
 
 --c
