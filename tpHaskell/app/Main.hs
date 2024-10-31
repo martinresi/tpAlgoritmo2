@@ -41,9 +41,6 @@ hayMagoSinHechizos = any (\mago -> nombre mago == "Hagrid" && null (hechizos mag
 sonTodosViejosNionios :: Academia -> Bool
 sonTodosViejosNionios = all (\mago -> edad mago <= 16 || length (hechizos mago) > (edad mago * 3))
 
-main :: IO ()
-main = someFunc
-
 
 --5
 
@@ -56,3 +53,6 @@ aplicarHechizos mago hechizos = foldl aplicarHechizo mago hechizos
 noPuedeGanarle::Mago -> Mago -> Bool
 noPuedeGanarle mago1 mago2 = salud mago1 == salud (aplicarHechizos mago1 (hechizos mago2))
 
+
+main :: IO ()
+main = someFunc
