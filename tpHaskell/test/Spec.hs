@@ -21,6 +21,7 @@ danio mago (SectumSempra _) | salud mago > 10 = 10
 diferenciaDePoder:: Mago -> Mago -> Int
 diferenciaDePoder mago1 mago2 = abs (poder mago1 - poder mago2)
 
+type Academia = [Mago]
 
 hayMagoSinHechizos :: Academia -> Bool
 hayMagoSinHechizos = any (\mago -> nombre mago == "Hagrid" && null (hechizos mago))
