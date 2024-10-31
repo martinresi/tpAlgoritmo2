@@ -43,3 +43,16 @@ sonTodosViejosNionios = all (\mago -> edad mago <= 16 || length (hechizos mago) 
 
 main :: IO ()
 main = someFunc
+
+
+--5
+
+aplicarHechizo::Mago -> Hechizos -> Mago
+aplicarHechizo mago hechizo = mago {salud=salud mago - danio mago hechizo}
+
+aplicarHechizos::Mago -> [Hechizos] -> Mago
+aplicarHechizos mago hechizos = foldl aplicarHechizo mago hechizos
+
+noPuedeGanarle::Mago -> Mago -> Bool
+noPuedeGanarle mago1 mago2 = salud mago1 == salud (aplicarHechizos mago1 (hechizos mago2))
+
