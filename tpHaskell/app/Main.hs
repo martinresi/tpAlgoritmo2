@@ -44,10 +44,36 @@ sonTodosViejosNionios = all (\mago -> edad mago <= 16 || length (hechizos mago) 
 
 --4
 --a
+f x [y] = y
+f x (y1:y2:ys)
+      | x y1 >= x y2 = f x (y1:ys)
+      | otherwise = f x (y2 : ys)
 
+-- Analizando el cuerpo de la funcion, podemos intuir desde el inicio que se busca un valor Mayor/Maximo 
+-- del contenido que se encuentra en la lista que ingresa como parametro. Este contenido es afectado por "x"
+-- quien se encuentra afectando a cada elemento de la lista, por lo tanto actua como una funcion. 
+-- Y dependiendo si es el primer elementro o el segundo, se llama nuevamente a la funcion de manera recursiva
+-- para seguir analizando los casos siguientes que se encuentran en la lista hasta el final de la misma.
+
+-- Tipo
+-- como se esta usando ">=" ya sabemos que recibe y devuelve valores comparables
+-- como hay una funcion dentro ("x") sabemos que este recibe un valor de tipo A y devuelve un valor B que es comparable
+-- como la lista posee los elementos que usa la funcion "x", posee valores de tipo A
+-- Y como el caso base devuelve un elemnto de la lista, entonces la funcion entera tambien devuelve un valor del mismo tipo "A"
+valorMaximo :: Ord b => (a -> b) -> [a] -> a
+
+--Mas expresivo
+valorMaximo funcion [y] = y
+valorMaximo funcion (cabeza : siguiente : cola)
+      | funcion cabeza >= funcion siguiente = valorMaximo funcion (cabeza : cola)
+      | otherwise = valorMaximo funcion (siguiente : cola)
 
 --b
+mejorHechizoContra :: Mago -> Mago -> hechizos
+mejorHechizoContra mago_A mago_B = valorMaximo (danio mago_A) (hechizos mago_B)
 
+mejorOponente :: Mago -> Academia -> Mago
+mejorOponente mago academia = diferenciaDePoder mago (valorMaximo poder Academia)
 
 --5
 
