@@ -21,6 +21,13 @@ danio mago (SectumSempra _) | salud mago > 10 = 10
 diferenciaDePoder:: Mago -> Mago -> Int
 diferenciaDePoder mago1 mago2 = abs (poder mago1 - poder mago2)
 
+
+hayMagoSinHechizos :: Academia -> Bool
+hayMagoSinHechizos = any (\mago -> nombre mago == "Hagrid" && null (hechizos mago))
+
+sonTodosViejosNionios :: Academia -> Bool
+sonTodosViejosNionios = all (\mago -> edad mago <= 16 || length (hechizos mago) > (edad mago * 3))
+
 main :: IO ()
 main = hspec $ do
   --2a
@@ -44,3 +51,22 @@ main = hspec $ do
       let mago1 = Mago { nombre = "Dumbledore", edad = 100, salud = 90, hechizos = [Obliviate] }
       let mago2 = Mago { nombre = "Voldemort", edad = 70, salud = 100, hechizos = [SectumSempra 20, LagrimaFenix 50] }
       diferenciaDePoder mago1 mago2 `shouldBe` 50  
+ -- 3a
+  describe "hayMagoSinHechizos" $ do
+    it "Verifica si hay un mago llamado Hagrid sin hechizos en la academia" $ do
+      let academiaEjemplo = [Mago { nombre = "Hagrid", edad = 40, salud = 100, hechizos = [] }]
+      hayMagoSinHechizos academiaEjemplo `shouldBe` True
+
+    it "Verifica si no hay un mago llamado Hagrid sin hechizos en la academia" $ do
+      let academiaEjemplo = [Mago { nombre = "Dumbledore", edad = 100, salud = 100, hechizos = [Confundus] }]
+      hayMagoSinHechizos academiaEjemplo `shouldBe` False
+
+   -- 3b
+  describe "sonTodosViejosNionios" $ do
+    it "Verifica si todos los magos viejos (edad > 16) son ñoños" $ do
+      let academiaEjemplo = [Mago { nombre = "OldMago", edad = 50, salud = 100, hechizos = replicate 200 Confundus }]
+      sonTodosViejosNionios academiaEjemplo `shouldBe` True
+
+    it "Verifica que no todos los magos viejos son ñoños" $ do
+      let academiaEjemplo = [Mago { nombre = "NonNerdMago", edad = 50, salud = 100, hechizos = replicate 10 Confundus }]
+      sonTodosViejosNionios academiaEjemplo `shouldBe` False
