@@ -28,6 +28,15 @@ hayMagoSinHechizos = any (\mago -> nombre mago == "Hagrid" && null (hechizos mag
 sonTodosViejosNionios :: Academia -> Bool
 sonTodosViejosNionios = all (\mago -> edad mago <= 16 || length (hechizos mago) > (edad mago * 3))
 
+aplicarHechizo::Mago -> Hechizos -> Mago
+aplicarHechizo mago hechizo = mago {salud=salud mago - danio mago hechizo}
+
+aplicarHechizos::Mago -> [Hechizos] -> Mago
+aplicarHechizos mago hechizos = foldl aplicarHechizo mago hechizos
+
+noPuedeGanarle::Mago -> Mago -> Bool
+noPuedeGanarle mago1 mago2 = salud mago1 == salud (aplicarHechizos mago1 (hechizos mago2))
+
 main :: IO ()
 main = hspec $ do
   --2a
@@ -70,3 +79,16 @@ main = hspec $ do
     it "Verifica que no todos los magos viejos son ñoños" $ do
       let academiaEjemplo = [Mago { nombre = "NonNerdMago", edad = 50, salud = 100, hechizos = replicate 10 Confundus }]
       sonTodosViejosNionios academiaEjemplo `shouldBe` False
+
+  --5
+
+  describe "noPuedeGanarle" $ do
+    it "El segundo mago no puede ganarle al primero si la salud del primer mago sigue siendo la misma" $ do
+      let mago1 = Mago { nombre = "Albus", edad = 100, salud = 100, hechizos = [] }
+      let mago2 = Mago { nombre = "Snape", edad = 90, salud = 80, hechizos = [Obliviate, Confundus] }
+      noPuedeGanarle mago1 mago2 `shouldBe` True
+
+    it "El segundo mago puede ganarle al primero si la salud del primero cambia" $ do
+      let mago1 = Mago { nombre = "Albus", edad = 100, salud = 100, hechizos = [] }
+      let mago2 = Mago { nombre = "Snape", edad = 90, salud = 80, hechizos = [LagrimaFenix 20, SectumSempra 15] }
+      noPuedeGanarle mago1 mago2 `shouldBe` False
