@@ -21,14 +21,15 @@ danio:: Mago -> Hechizos -> Int
 -- a la salud del magoo total   le resto la que se cura  ATTENTION : a testear
 danio mago (LagrimaFenix lagrimaFenixSalud) = salud mago - ( salud mago + lagrimaFenixSalud )  
 
-danio mago (LagrimaFenix vida) = -vida
-danio mago SectumSempra | salud mago > 10 = 10
-                        | otherwise = div (salud mago) 2
-
-
+danio mago (LagrimaFenix vida) = -vida -- a revisar esto me hace ruido
+danio mago (SectumSempra  _)| salud mago > 10 = 10
+                            | otherwise = div (salud mago) 2
+-- no son hechizos de danio                                                    
+danio _ Obliviate = 0  
+danio _ Confundus = 0 
 
 --c
--- diferenciaDePoder:: Mago -> Mago -> Int
+diferenciaDePoder:: Mago -> Mago -> Int
 diferenciaDePoder mago1 mago2 = abs (poder mago1 - poder mago2)
 
 --3
@@ -40,6 +41,12 @@ hayMagoSinHechizos = any (\mago -> nombre mago == "Hagrid" && null (hechizos mag
 --b
 sonTodosViejosNionios :: Academia -> Bool
 sonTodosViejosNionios = all (\mago -> edad mago <= 16 || length (hechizos mago) > (edad mago * 3))
+
+--4
+--a
+
+
+--b
 
 
 --5
