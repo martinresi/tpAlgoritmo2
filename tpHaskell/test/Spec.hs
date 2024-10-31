@@ -13,10 +13,13 @@ poder :: Mago -> Int
 poder mago = salud mago + (edad mago * length (hechizos mago))
 
 danio :: Mago -> Hechizos -> Int
+danio _ Obliviate = 0
+danio _ Confundus = 0
 danio mago (LagrimaFenix lagrimaFenixSalud) = salud mago - (salud mago + lagrimaFenixSalud)
 danio mago (LagrimaFenix vida) = -vida
 danio mago (SectumSempra _) | salud mago > 10 = 10
                             | otherwise = div (salud mago) 2
+
 
 diferenciaDePoder:: Mago -> Mago -> Int
 diferenciaDePoder mago1 mago2 = abs (poder mago1 - poder mago2)
