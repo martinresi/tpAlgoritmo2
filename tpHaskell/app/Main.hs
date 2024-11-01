@@ -69,11 +69,11 @@ valorMaximo funcion (cabeza : siguiente : cola)
       | otherwise = valorMaximo funcion (siguiente : cola)
 
 --b
-mejorHechizoContra :: Mago -> Mago -> hechizos
+mejorHechizoContra :: Mago -> Mago -> Hechizos
 mejorHechizoContra mago_A mago_B = valorMaximo (danio mago_A) (hechizos mago_B)
 
 mejorOponente :: Mago -> Academia -> Mago
-mejorOponente mago academia = diferenciaDePoder mago (valorMaximo poder Academia)
+mejorOponente mago academia = valorMaximo (diferenciaDePoder mago) academia
 
 --5
 
