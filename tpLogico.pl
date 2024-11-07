@@ -17,6 +17,7 @@ persona(juan, pelo(rubio, lacio)).
 persona(juan, cara(redonda)).
 carta(rojo, samuel).
 carta(azul, pepe).
+carta(rojo, juan).
 contrincante(rojo, azul).
 contrincante(azul, rojo).
 pista(rojo,pelo(rubio,_)).
@@ -61,8 +62,8 @@ rubiosDeBocaChica(Personas) :-
 % Con dicho predicado, queremos relacionar una persona y un jugador solo si todas las pistas que tiene el jugador
 % son características de la persona. En este punto no se puede usar findall.
 
-cumpleCaracteristicas(Color, Persona):- carta(Color, Persona),
-    forall(pista(Color,Caracteristica), persona(Persona, Caracteristica)).
+cumpleCaracteristicas(Jugador, Persona):- carta(Jugador, Persona),
+    forall(pista(Jugador,Caracteristica), persona(Persona, Caracteristica)).
 
 % 5. Por último queremos saber si un color está ganándole a su contrincante. Para eso, 
 % las personas que cumplen las pistas, deben ser menos que las personas que cumplen las pistas de su contrincante.
