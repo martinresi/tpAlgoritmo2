@@ -17,7 +17,6 @@ persona(juan, pelo(rubio, lacio)).
 persona(juan, cara(redonda)).
 carta(rojo, samuel).
 carta(azul, pepe).
-carta(rojo, juan).
 contrincante(rojo, azul).
 contrincante(azul, rojo).
 pista(rojo,pelo(rubio,_)).
@@ -47,7 +46,7 @@ persona(Persona, ojos(marrones)):-persona(Persona,pelo(castania,_)).
 
 % c. Los que no tienen la cara puntuda, tienen la cara redonda.
 persona(Persona, cara(redonda)):-not(persona(Persona, cara(puntuda))).
-persona(Persona, cara(puntuda)):-not(persona(Persona, cara(redonda))).
+persona(Persona, cara(puntuda)):-persona(Persona,_),not(persona(Persona, cara(redonda))).
 
 % Realizar el predicado que nos permita agregar este conocimiento y el punto 1 no deba modificarse.
 % 3. Se necesita saber el conjunto de todos los rubios de boca chica.
@@ -63,7 +62,7 @@ rubiosDeBocaChica(Personas) :-
 % son características de la persona. En este punto no se puede usar findall.
 
 cumpleCaracteristicas(Jugador, Persona):- carta(Jugador, Persona),
-    forall(pista(Jugador,Caracteristica), persona(Persona, Caracteristica)).
+    forall(pista(Jugador,Pista), persona(Persona, Pista)).
 
 % 5. Por último queremos saber si un color está ganándole a su contrincante. Para eso, 
 % las personas que cumplen las pistas, deben ser menos que las personas que cumplen las pistas de su contrincante.

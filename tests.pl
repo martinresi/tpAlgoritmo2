@@ -1,3 +1,5 @@
+
+
 % PUNTO 1
 
 :- begin_tests(esCalvo).
@@ -7,7 +9,7 @@ test("esCalvo", fail) :-esCalvo(azul).
 
 :- begin_tests(esRubio).
 test("esRubio",fail) :-esRubio(negro).
-test("esRubio",fail) :-esRubio(negro).  
+test("esRubio",nondet) :-esRubio(azul).  
 :- end_tests(esRubio).
 
 :- begin_tests(tieneLentes).
@@ -26,11 +28,11 @@ test("tieneLentes", fail) :- persona(pepe, lentes(marron)).
 :- end_tests(personaConLentes).
 
 :- begin_tests(personaQueNoTieneOjosMarrones).
-test("noTieneOjosMarrones") :- persona(juan, ojos(marrones)).
+test("noTieneOjosMarrones", fail) :- persona(juan, ojos(marrones)).
 :- end_tests(personaQueNoTieneOjosMarrones).
 
 :- begin_tests(personaConCaraRedonda).
-test("tieneCaraRedonda", nondet) :- persona(juan, cara(redonda)).
+test("tieneCaraRedonda", fail) :- persona(pepe, cara(redonda)).
 :- end_tests(personaConCaraRedonda).
 
 :- begin_tests(verificar_Inversibilidad).
@@ -42,11 +44,11 @@ test("personas_con_ojos_marrones", set (Persona = [samuel, pepe])):- persona(Per
 :- begin_tests(rubiosDeBocaChica).
 
 test("rubiosDeBocaChica", [true(Personas == [pepe, juan])]) :-
-    rubiosDeBocaChica(Personas), !.
+    rubiosDeBocaChica(Personas).
 
-test("pepe es rubio de boca chica", true) :- 
+test("pepe es rubio de boca chica", nondet) :- 
     rubiosDeBocaChica(Personas),
-    member(pepe, Personas), !.
+    member(pepe, Personas).
 
 test("Samuel no es rubio de boca chica", fail) :-
     rubiosDeBocaChica(Personas),
