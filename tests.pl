@@ -32,7 +32,7 @@ test("noTieneOjosMarrones", fail) :- persona(juan, ojos(marrones)).
 :- end_tests(personaQueNoTieneOjosMarrones).
 
 :- begin_tests(personaConCaraRedonda).
-test("tieneCaraRedonda", fail) :- persona(pepe, cara(redonda)).
+test("tieneCaraRedonda") :- persona(juan, cara(redonda)).
 :- end_tests(personaConCaraRedonda).
 
 :- begin_tests(verificar_Inversibilidad).
