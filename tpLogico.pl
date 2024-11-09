@@ -61,7 +61,7 @@ rubiosDeBocaChica(Personas) :-
 % Con dicho predicado, queremos relacionar una persona y un jugador solo si todas las pistas que tiene el jugador
 % son características de la persona. En este punto no se puede usar findall.
 
-cumpleCaracteristicas(Jugador, Persona):- carta(Jugador, Persona),
+cumpleCaracteristicas(Jugador, Persona):- jugadores(Persona), pista(Jugador,_),
     forall(pista(Jugador,Pista), persona(Persona, Pista)).
 
 % 5. Por último queremos saber si un color está ganándole a su contrincante. Para eso, 
