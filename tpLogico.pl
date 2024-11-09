@@ -61,6 +61,9 @@ rubiosDeBocaChica(Personas) :-
 % Con dicho predicado, queremos relacionar una persona y un jugador solo si todas las pistas que tiene el jugador
 % son características de la persona. En este punto no se puede usar findall.
 
+% Se agrego el predicado jugadores() para que no devolviera varios true al buscar la inversibilidad, 
+% sino se remplazaria por persona(Persona,_), y el resultado seria el mismo.
+
 cumpleCaracteristicas(Jugador, Persona):- jugadores(Persona), pista(Jugador,_),
     forall(pista(Jugador,Pista), persona(Persona, Pista)).
 
