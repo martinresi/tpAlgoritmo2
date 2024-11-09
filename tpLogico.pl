@@ -14,7 +14,7 @@ persona(pepe, ojos(marrones)).
 persona(pepe, nariz(chica)).
 persona(juan, boca(chica)).
 persona(juan, pelo(rubio, lacio)).
-persona(juan, cara(redonda)).
+persona(juan, cara(cuadrada)).
 carta(rojo, samuel).
 carta(azul, pepe).
 contrincante(rojo, azul).
@@ -45,8 +45,7 @@ persona(Persona, ojos(marrones)):-persona(Persona,pelo(morocha,_)).
 persona(Persona, ojos(marrones)):-persona(Persona,pelo(castania,_)).
 
 % c. Los que no tienen la cara puntuda, tienen la cara redonda.
-persona(Persona, cara(redonda)):-not(persona(Persona, cara(puntuda))).
-persona(Persona, cara(puntuda)):-persona(Persona,_),not(persona(Persona, cara(redonda))).
+persona(Persona, cara(redonda)):- jugadores(Persona), not(persona(Persona, cara(puntuda))).
 
 % Realizar el predicado que nos permita agregar este conocimiento y el punto 1 no deba modificarse.
 % 3. Se necesita saber el conjunto de todos los rubios de boca chica.
