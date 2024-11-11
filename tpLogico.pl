@@ -69,22 +69,10 @@ cumpleCaracteristicas(Jugador, Persona):- jugadores(Persona), pista(Jugador,_),
 % 5. Por último queremos saber si un color está ganándole a su contrincante. Para eso, 
 % las personas que cumplen las pistas, deben ser menos que las personas que cumplen las pistas de su contrincante.
 
-/* 
---Forma numero 1
-
 cantidadQueCumplen(Color, Cantidad) :-
     findall(Persona, cumpleCaracteristicas(Color, Persona), Personas),
     list_to_set(Personas, Lista),
     length(Lista, Cantidad).
-*/
-
-% Forma numero 2, Y es la que elegimos porque el list_to_set arregla el problema, 
-% pero no lo pedido (ver las personas unicas)
-
-cantidadQueCumplen(Color, Cantidad) :- jugadores(Persona),
-    findall(Persona, cumpleCaracteristicas(Color, Persona), Personas),
-    length(Personas, Cantidad).
-
 
 estaGanando(Color) :-
     contrincante(Color, Contrincante),
