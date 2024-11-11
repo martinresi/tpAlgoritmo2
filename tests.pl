@@ -34,9 +34,9 @@ test("noTieneOjosMarrones", fail) :- persona(juan, ojos(marrones)).
 test("tieneCaraRedonda") :- persona(juan, cara(redonda)).
 :- end_tests(personaConCaraRedonda).
 
-:- begin_tests(verificar_Inversibilidad).
+:- begin_tests(verificar_Inversibilidad_test).
 test("personas_con_ojos_marrones", set(Persona = [samuel, pepe])):- persona(Persona, ojos(marrones)).
-:- end_tests(verificar_Inversibilidad).
+:- end_tests(verificar_Inversibilidad_test).
 
 % PUNTO 3
 
