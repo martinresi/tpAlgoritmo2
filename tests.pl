@@ -67,10 +67,10 @@ test("cumpleCaracteristicas", fail) :- cumpleCaracteristicas(rojo, samuel).
 % PUNTO 5
 
 :- begin_tests(estaGanando).
-test("Está ganando el rojo") :- 
+test("Está ganando el rojo", fail) :- 
     estaGanando(rojo).
 
-test("Está perdiendo el azul",fail) :- 
+test("Está perdiendo el azul") :- 
     estaGanando(azul).
 :- end_tests(estaGanando).
 
