@@ -55,7 +55,7 @@ test("Samuel no es rubio de boca chica", fail) :-
 :- end_tests(rubiosDeBocaChica).
 
 :- begin_tests(verificar_Inversibilidad).
-test("conjunto_de_rubios_con_boca_chica", set(Personas == [[juan, pepe]])) :- rubiosDeBocaChica(Personas).
+test("conjunto_de_rubios_con_boca_chica", set(Persona == [juan, pepe])) :- rubiosDeBocaChica(Personas), member(Persona, Personas).
 :- end_tests(verificar_Inversibilidad).
 
 % PUNTO 4
