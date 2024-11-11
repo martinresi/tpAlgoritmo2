@@ -1,5 +1,4 @@
-
-
+:- include('tpLogico.pl').
 % PUNTO 1
 
 :- begin_tests(esCalvo).
@@ -17,9 +16,9 @@ test("tieneLentes",nondet) :-tieneLentes(azul).
 test("tieneLentes",fail) :-tieneLentes(negro).
 :- end_tests(tieneLentes).
 
-:- begin_tests(verificar_Inversibilidad).
-test("equipos_con_personas_con_lentes", set (Equipo = [rojo, azul])):- tieneLentes(Equipo).
-:- end_tests(verificar_Inversibilidad).
+:- begin_tests(verificar_Inversibilidad_tests).
+test("equipos_con_personas_con_lentes", set(Equipo = [rojo, azul])):- tieneLentes(Equipo).
+:- end_tests(verificar_Inversibilidad_tests).
 
 % PUNTO 2
 
@@ -36,7 +35,7 @@ test("tieneCaraRedonda") :- persona(juan, cara(redonda)).
 :- end_tests(personaConCaraRedonda).
 
 :- begin_tests(verificar_Inversibilidad).
-test("personas_con_ojos_marrones", set (Persona = [samuel, pepe])):- persona(Persona, ojos(marrones)).
+test("personas_con_ojos_marrones", set(Persona = [samuel, pepe])):- persona(Persona, ojos(marrones)).
 :- end_tests(verificar_Inversibilidad).
 
 % PUNTO 3
@@ -56,7 +55,7 @@ test("Samuel no es rubio de boca chica", fail) :-
 :- end_tests(rubiosDeBocaChica).
 
 :- begin_tests(verificar_Inversibilidad).
-test("conjunto_de_rubios_con_boca_chica", set (Personas == [pepe, juan])]) :- rubiosDeBocaChica(Personas).
+test("conjunto_de_rubios_con_boca_chica", [set(Personas == [juan, pepe])]) :- rubiosDeBocaChica(Personas).
 :- end_tests(verificar_Inversibilidad).
 
 % PUNTO 4
