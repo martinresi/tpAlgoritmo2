@@ -16,9 +16,9 @@ test("tieneLentes",nondet) :-tieneLentes(azul).
 test("tieneLentes",fail) :-tieneLentes(negro).
 :- end_tests(tieneLentes).
 
-:- begin_tests(verificar_Inversibilidad_tests).
+:- begin_tests(verificar_Inversibilidad).
 test("equipos_con_personas_con_lentes", set(Equipo = [rojo, azul])):- tieneLentes(Equipo).
-:- end_tests(verificar_Inversibilidad_tests).
+:- end_tests(verificar_Inversibilidad).
 
 % PUNTO 2
 
@@ -54,9 +54,9 @@ test("Samuel no es rubio de boca chica", fail) :-
     member(samuel, Personas).
 :- end_tests(rubiosDeBocaChica).
 
-:- begin_tests(verificar_Inversibilidad).
+:- begin_tests(verificar_Inversibilidad_test).
 test("conjunto_de_rubios_con_boca_chica", set(Persona == [juan, pepe])) :- rubiosDeBocaChica(Personas), member(Persona, Personas).
-:- end_tests(verificar_Inversibilidad).
+:- end_tests(verificar_Inversibilidad_test).
 
 % PUNTO 4
 
