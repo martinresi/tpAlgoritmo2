@@ -5,7 +5,7 @@ module Lib
     sonTodosViejosNionios, f, valorMaximo, mejorHechizoContra,
     mejorOponente, aplicarHechizo, noPuedeGanarle, academiaEjemplo,academiaEjemplo2, academiaEjemplo3,
     ron, hermione,
-    Mago, Hechizos(LagrimaFenix,Confundus,Obliviate,SectumSempra)
+    Mago, Hechizo(LagrimaFenix,Confundus,Obliviate,SectumSempra)
     ) where
 
 
@@ -16,14 +16,15 @@ data Mago = Mago{
     nombre::String,
     edad::Int, 
     salud::Int, 
-    hechizos::[Hechizos]
+    hechizos::[Hechizo]
     } deriving (Show, Eq)
 
-data Hechizos = LagrimaFenix {lagrimaFenixSalud::Int}
-              | SectumSempra {sectumSempraDanio::Int}
-              | Obliviate {}
-              | Confundus {}
-              deriving (Show, Eq)
+data Hechizo = LagrimaFenix Int       -- Recupera una cantidad de salud especificada
+             | SectumSempra           -- Hace daño basado en la salud actual
+             | Obliviate Int          -- Olvida los primeros N hechizos
+             | Confundus              -- Se ataca a sí mismo con el primer hechizo
+             deriving (Show, Eq)
+
 
 harry = Mago { 
     nombre = "Harry", 
@@ -35,7 +36,7 @@ luis = Mago {
     nombre = "luis", 
     edad = 70,
     salud = 100,
-    hechizos = [SectumSempra 20, LagrimaFenix 50] }
+    hechizos = [SectumSempra, LagrimaFenix 50] }
 
 ron = Mago { 
     nombre = "ron", 
@@ -47,7 +48,7 @@ hermione = Mago {
     nombre = "hermione", 
     edad = 90, 
     salud = 80, 
-    hechizos = [Obliviate, Confundus]
+    hechizos = [Obliviate 10, Confundus]
     }
 
 academiaEjemplo = 
@@ -77,23 +78,27 @@ academiaEjemplo3 =
         }
     ]
 
-poder::Mago -> Int
+
+aplicarHechizo1 :: Hechizo -> Mago -> Mago
+aplicarHechizo1 (LagrimaFenix cantidad) mago = mago { salud = salud mago + cantidad }
+
+aplicarHechizo2 SectumSempra mago
+    | salud mago > 10 = mago { salud = salud mago - 10 }
+    | otherwise       = mago { salud = salud mago `div` 2 }
+aplicarHechizo3 (Obliviate n) mago = mago { hechizos = drop n (hechizos mago) }
+---no me convence 
+aplicarHechizo4 Confundus mago
+    | null (hechizos mago) = error "El mago no tiene hechizos para confundirse"
+    | otherwise            = aplicarHechizo (head (hechizos mago)) mago
+
+poder :: Mago -> Int
 poder mago = salud mago + (edad mago * length (hechizos mago))
 
-danio:: Mago -> Hechizos -> Int
--- a la salud del magoo total   le resto la que se cura  ATTENTION : a testear
-danio mago (LagrimaFenix lagrimaFenixSalud) = salud mago - ( salud mago + lagrimaFenixSalud )  
+daño :: Mago -> Hechizo -> Int
+daño mago hechizo = salud mago - salud (aplicarHechizo hechizo mago)
 
-danio mago (LagrimaFenix vida) = -vida -- a revisar esto me hace ruido
-danio mago (SectumSempra  _)| salud mago > 10 = 10
-                            | otherwise = div (salud mago) 2
--- no son hechizos de danio                                                    
-danio _ Obliviate = 0  
-danio _ Confundus = 0 
-
---c
-diferenciaDePoder:: Mago -> Mago -> Int
-diferenciaDePoder harry luis = abs (poder harry - poder luis)
+diferenciaDePoder :: Mago -> Mago -> Int
+diferenciaDePoder mago1 mago2 = abs (poder mago1 - poder mago2)
 
 --3
 type Academia = [Mago]
@@ -132,7 +137,7 @@ valorMaximo funcion (cabeza : siguiente : cola)
       | otherwise = valorMaximo funcion (siguiente : cola)
 
 --b
-mejorHechizoContra :: Mago -> Mago -> Hechizos
+mejorHechizoContra :: Mago -> Mago -> Hechizo
 mejorHechizoContra mago_A mago_B = valorMaximo (danio mago_A) (hechizos mago_B)
 
 mejorOponente :: Mago -> Academia -> Mago
@@ -140,10 +145,11 @@ mejorOponente mago academia = valorMaximo (diferenciaDePoder mago) academia
 
 --5
 
-aplicarHechizo::Mago -> Hechizos -> Mago
-aplicarHechizo mago hechizo = mago {salud=salud mago - danio mago hechizo}
+aplicarHechizo :: Hechizo -> Mago -> Mago
+aplicarHechizo hechizo mago = mago { salud = salud mago - danio mago hechizo }
 
-aplicarHechizos::Mago -> [Hechizos] -> Mago
+
+aplicarHechizos::Mago -> [Hechizo] -> Mago
 aplicarHechizos mago hechizos = foldl aplicarHechizo mago hechizos
 
 noPuedeGanarle::Mago -> Mago -> Bool

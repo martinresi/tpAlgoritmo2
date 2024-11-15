@@ -1,5 +1,5 @@
 import Test.Hspec
-import Lib (Mago,Hechizos(LagrimaFenix,SectumSempra,Obliviate,Confundus), poder, danio, diferenciaDePoder, harry, luis,ron, hermione, academiaEjemplo, academiaEjemplo2, academiaEjemplo3,  hayMagoSinHechizos, sonTodosViejosNionios, noPuedeGanarle)
+import Lib (Mago,Hechizo(LagrimaFenix,SectumSempra,Obliviate,Confundus), poder, danio, diferenciaDePoder, harry, luis,ron, hermione, academiaEjemplo, academiaEjemplo2, academiaEjemplo3,  hayMagoSinHechizos, sonTodosViejosNionios, noPuedeGanarle)
 
 main :: IO ()
 main = hspec $ do
