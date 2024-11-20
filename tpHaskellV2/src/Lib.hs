@@ -4,28 +4,37 @@ module Lib
     hayMagoSinHechizos, 
     sonTodosViejosNionios, f, valorMaximo, mejorHechizoContra,
     mejorOponente, noPuedeGanarle, academiaEjemplo,academiaEjemplo2, academiaEjemplo3,
-    ron, hermione, prueba, show,
+    ron, hermione, fede, show,
     Mago, Hechizo, lagrimaFenix,confundus,obliviate,sectumSempra
     ) where
 
 
 someFunc :: IO ()
 
-type Hechizo = Mago -> Mago 
+type Hechizo = Mago -> Mago
 
-data Mago = Mago{
-    nombre::String,
-    edad::Int, 
-    salud::Int, 
-    hechizos::[Hechizo]
-    }
+data Mago = Mago {
+    nombre :: String,
+    edad :: Int,
+    salud :: Int,
+    hechizos :: [Hechizo]
+}
+
+-- Como "Hechizo" ahora es una lista de funciones, el "Show" no sabe como mostrar las mismas
+-- entonces seteamos esta instancia para poder ver que nos tira las funciones sin necesidad
+-- de mostrar la lista de hechizos
+instance Show Mago where
+    show (Mago nombre edad salud _) =
+        "Mago { nombre = " ++ show nombre ++
+        ", edad = " ++ show edad ++
+        ", salud = " ++ show salud ++ " }"
 
 
-prueba = Mago { 
+fede = Mago { 
     nombre = "prueba", 
     edad = 70,
-    salud = 100,
-    hechizos = [lagrimaFenix 50]
+    salud = 50,
+    hechizos = [obliviate 1]
     }
 
 luis = Mago { 
@@ -49,6 +58,7 @@ hermione = Mago {
 
 
 academiaEjemplo5 = [luis, hermione]
+
 academiaEjemplo = 
   [ Mago 
       { nombre = "Hagrid", 
@@ -85,26 +95,26 @@ sectumSempra mago
     | otherwise = mago { salud = salud mago `div` 2 }
 
 obliviate :: Int -> Hechizo
-obliviate cantidad mago = mago { edad = edad mago - cantidad }
+obliviate n mago = mago { hechizos = drop n (hechizos mago) }
 
-confundus :: Mago -> Mago
+confundus :: Hechizo
 confundus mago
-    | length (hechizos mago) == 0 = error "El mago no tiene hechizos para confundirse"
-    | otherwise = mago {salud = max 0 (salud mago - 5)}
-
-
-
+    | length (hechizos mago) == 0 = error "El mago no tiene hechizos"
+--    | otherwise            = (head (hechizos mago)) mago
+-- no logramos hacer que tome el primer hechizo, nos pide utilizar librerias y funciones que no se vio en la cursada
+-- asi que por el momento usaremos esto hasta resolver el problema
+    | otherwise            = mago {salud = max 0 (salud mago - 5)}
 
 --2
---a) ok
+--a)
 poder :: Mago -> Int
 poder mago = salud mago + (edad mago * length (hechizos mago))
 
---b) chequear
+--b)
 danio :: Mago -> Hechizo -> Int
 danio mago hechizo = salud mago - salud (aplicarHechizo hechizo mago)
 
---c) ok
+--c)
 diferenciaDePoder :: Mago -> Mago -> Int
 diferenciaDePoder mago otroMago = abs (poder mago - poder otroMago)
 
@@ -126,12 +136,18 @@ sonTodosViejosNionios :: Academia -> Bool
 sonTodosViejosNionios = all (\mago -> edad mago > 16 && length (hechizos mago) > (edad mago * 3))
 
 --4
---a
 f x [y] = y
 f x (y1:y2:ys)
       | x y1 >= x y2 = f x (y1:ys)
       | otherwise = f x (y2 : ys)
 
+--a)
+--Para que sirve:
+-- Sirve para buscar el valor mas grande o maximo que se encuentra dentro de una lista
+-- usando una funcion como parametro, el cual calcula (en base de como este hecha la funcion)
+-- cada valor de la lista y las compara hasta obtener el valor mas alto.
+
+--Como lo hace:
 -- Analizando el cuerpo de la funcion, podemos intuir desde el inicio que se busca un valor Mayor/Maximo 
 -- del contenido que se encuentra en la lista que ingresa como parametro. Este contenido es afectado por "x"
 -- quien se encuentra afectando a cada elemento de la lista, por lo tanto actua como una funcion. 
@@ -143,6 +159,7 @@ f x (y1:y2:ys)
 -- como hay una funcion dentro ("x") sabemos que este recibe un valor de tipo A y devuelve un valor B que es comparable
 -- como la lista posee los elementos que usa la funcion "x", posee valores de tipo A
 -- Y como el caso base devuelve un elemnto de la lista, entonces la funcion entera tambien devuelve un valor del mismo tipo "A"
+
 valorMaximo :: Ord b => (a -> b) -> [a] -> a
 
 --Mas expresivo
@@ -158,23 +175,14 @@ mejorHechizoContra mago_A mago_B = valorMaximo (danio mago_A) (hechizos mago_B)
 mejorOponente :: Mago -> Academia -> Mago
 mejorOponente mago academia = valorMaximo (diferenciaDePoder mago) academia
 
---5 ok, hay que ver con los tests
-
+--5) 
 aplicarHechizo :: Hechizo -> Mago -> Mago
 aplicarHechizo hechizo mago = hechizo mago
 
 aplicarHechizos :: Mago -> [Hechizo] -> Mago
 aplicarHechizos mago hechizos = foldl (\m h -> h m) mago hechizos
 
-
-
 noPuedeGanarle::Mago -> Mago -> Bool
 noPuedeGanarle mago1 mago2 = salud mago1 == salud (aplicarHechizos mago1 (hechizos mago2))
-
-
-
-
-
-
 
 someFunc = putStrLn "someFunc"
