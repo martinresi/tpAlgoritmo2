@@ -1,56 +1,54 @@
 module Lib
-    ( someFunc, harry, luis,
+    ( someFunc, luis,
     poder, danio, diferenciaDePoder, 
     hayMagoSinHechizos, 
     sonTodosViejosNionios, f, valorMaximo, mejorHechizoContra,
-    mejorOponente, aplicarHechizo, noPuedeGanarle, academiaEjemplo,academiaEjemplo2, academiaEjemplo3,
-    ron, hermione,
-    Mago, Hechizo(LagrimaFenix,Confundus,Obliviate,SectumSempra)
+    mejorOponente, noPuedeGanarle, academiaEjemplo,academiaEjemplo2, academiaEjemplo3,
+    ron, hermione, prueba, show,
+    Mago, Hechizo, lagrimaFenix,confundus,obliviate,sectumSempra
     ) where
 
 
 someFunc :: IO ()
 
+type Hechizo = Mago -> Mago 
 
 data Mago = Mago{
     nombre::String,
     edad::Int, 
     salud::Int, 
     hechizos::[Hechizo]
-    } deriving (Show, Eq)
-
-data Hechizo = LagrimaFenix Int       -- Recupera una cantidad de salud especificada
-             | SectumSempra           -- Hace daño basado en la salud actual
-             | Obliviate Int          -- Olvida los primeros N hechizos
-             | Confundus              -- Se ataca a sí mismo con el primer hechizo
-             deriving (Show, Eq)
+    }
 
 
-harry = Mago { 
-    nombre = "Harry", 
-    edad = 5, 
-    salud = 100, 
-    hechizos = [LagrimaFenix 50, Confundus] }
+prueba = Mago { 
+    nombre = "prueba", 
+    edad = 70,
+    salud = 100,
+    hechizos = [lagrimaFenix 50]
+    }
 
 luis = Mago { 
     nombre = "luis", 
     edad = 70,
     salud = 100,
-    hechizos = [SectumSempra, LagrimaFenix 50] }
+    hechizos = [sectumSempra, lagrimaFenix 50] }
 
 ron = Mago { 
     nombre = "ron", 
     edad = 100, 
     salud = 100, 
-    hechizos = [] 
+    hechizos = [confundus] 
     }
 hermione = Mago { 
     nombre = "hermione", 
     edad = 90, 
     salud = 80, 
-    hechizos = [Obliviate 10, Confundus]
+    hechizos = [obliviate 10, confundus]
     }
 
+
+academiaEjemplo5 = [luis, hermione]
 academiaEjemplo = 
   [ Mago 
       { nombre = "Hagrid", 
@@ -65,7 +63,7 @@ academiaEjemplo2 =
         {   nombre = "Dumbledore", 
             edad = 100, 
             salud = 100, 
-            hechizos = [Confundus] 
+            hechizos = [confundus] 
         }
     ]
 
@@ -74,41 +72,58 @@ academiaEjemplo3 =
         {   nombre = "OldMago", 
             edad = 50, 
             salud = 100, 
-            hechizos = replicate 200 Confundus 
+            hechizos = replicate 200 confundus 
         }
     ]
 
+lagrimaFenix :: Int -> Hechizo
+lagrimaFenix cantidad mago = mago { salud = salud mago + cantidad }
 
-aplicarHechizo1 :: Hechizo -> Mago -> Mago
-aplicarHechizo1 (LagrimaFenix cantidad) mago = mago { salud = salud mago + cantidad }
-
-aplicarHechizo2 SectumSempra mago
+sectumSempra :: Hechizo
+sectumSempra mago 
     | salud mago > 10 = mago { salud = salud mago - 10 }
-    | otherwise       = mago { salud = salud mago `div` 2 }
-aplicarHechizo3 (Obliviate n) mago = mago { hechizos = drop n (hechizos mago) }
----no me convence 
-aplicarHechizo4 Confundus mago
-    | null (hechizos mago) = error "El mago no tiene hechizos para confundirse"
-    | otherwise            = aplicarHechizo (head (hechizos mago)) mago
+    | otherwise = mago { salud = salud mago `div` 2 }
 
+obliviate :: Int -> Hechizo
+obliviate cantidad mago = mago { edad = edad mago - cantidad }
+
+confundus :: Mago -> Mago
+confundus mago
+    | length (hechizos mago) == 0 = error "El mago no tiene hechizos para confundirse"
+    | otherwise = mago {salud = max 0 (salud mago - 5)}
+
+
+
+
+--2
+--a) ok
 poder :: Mago -> Int
 poder mago = salud mago + (edad mago * length (hechizos mago))
 
-daño :: Mago -> Hechizo -> Int
-daño mago hechizo = salud mago - salud (aplicarHechizo hechizo mago)
+--b) chequear
+danio :: Mago -> Hechizo -> Int
+danio mago hechizo = salud mago - salud (aplicarHechizo hechizo mago)
 
+--c) ok
 diferenciaDePoder :: Mago -> Mago -> Int
-diferenciaDePoder mago1 mago2 = abs (poder mago1 - poder mago2)
+diferenciaDePoder mago otroMago = abs (poder mago - poder otroMago)
 
 --3
 type Academia = [Mago]
 --a
-hayMagoSinHechizos :: Academia -> Bool
-hayMagoSinHechizos = any (\mago -> nombre mago == "Hagrid" && null (hechizos mago))
+
+esListaVacia :: [Hechizo] -> Bool
+esListaVacia [] = True
+esListaVacia _  = False
+
+
+hayMagoSinHechizos :: [Mago] -> Bool
+hayMagoSinHechizos = any (\mago -> nombre mago == "Hagrid" && esListaVacia (hechizos mago))
+
 
 --b
 sonTodosViejosNionios :: Academia -> Bool
-sonTodosViejosNionios = all (\mago -> edad mago <= 16 || length (hechizos mago) > (edad mago * 3))
+sonTodosViejosNionios = all (\mago -> edad mago > 16 && length (hechizos mago) > (edad mago * 3))
 
 --4
 --a
@@ -131,7 +146,7 @@ f x (y1:y2:ys)
 valorMaximo :: Ord b => (a -> b) -> [a] -> a
 
 --Mas expresivo
-valorMaximo funcion [y] = y
+valorMaximo funcion [valor] = valor
 valorMaximo funcion (cabeza : siguiente : cola)
       | funcion cabeza >= funcion siguiente = valorMaximo funcion (cabeza : cola)
       | otherwise = valorMaximo funcion (siguiente : cola)
@@ -143,14 +158,15 @@ mejorHechizoContra mago_A mago_B = valorMaximo (danio mago_A) (hechizos mago_B)
 mejorOponente :: Mago -> Academia -> Mago
 mejorOponente mago academia = valorMaximo (diferenciaDePoder mago) academia
 
---5
+--5 ok, hay que ver con los tests
 
 aplicarHechizo :: Hechizo -> Mago -> Mago
-aplicarHechizo hechizo mago = mago { salud = salud mago - danio mago hechizo }
+aplicarHechizo hechizo mago = hechizo mago
+
+aplicarHechizos :: Mago -> [Hechizo] -> Mago
+aplicarHechizos mago hechizos = foldl (\m h -> h m) mago hechizos
 
 
-aplicarHechizos::Mago -> [Hechizo] -> Mago
-aplicarHechizos mago hechizos = foldl aplicarHechizo mago hechizos
 
 noPuedeGanarle::Mago -> Mago -> Bool
 noPuedeGanarle mago1 mago2 = salud mago1 == salud (aplicarHechizos mago1 (hechizos mago2))

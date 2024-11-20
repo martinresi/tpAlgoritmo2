@@ -1,5 +1,5 @@
 import Test.Hspec
-import Lib (Mago,Hechizo(LagrimaFenix,SectumSempra,Obliviate,Confundus), poder, danio, diferenciaDePoder, harry, luis,ron, hermione, academiaEjemplo, academiaEjemplo2, academiaEjemplo3,  hayMagoSinHechizos, sonTodosViejosNionios, noPuedeGanarle)
+import Lib (Mago,Hechizo,show, lagrimaFenix,sectumSempra,obliviate,confundus, poder,prueba, f, danio, diferenciaDePoder, luis,ron, hermione, academiaEjemplo, academiaEjemplo2, academiaEjemplo3,  hayMagoSinHechizos, sonTodosViejosNionios, noPuedeGanarle, valorMaximo, mejorHechizoContra, mejorOponente)
 
 main :: IO ()
 main = hspec $ do
@@ -7,20 +7,17 @@ main = hspec $ do
     -- 2a
     describe "poder" $ do
         it "Calcula el poder de un mago con hechizos" $ 
-            poder harry `shouldBe` 110
+            poder prueba `shouldBe` 170
   
     -- 2b
     describe "danio" $ do
         it "Calcula el daño de LagrimaFenix según lagrimaFenixSalud" $ 
-            danio harry (LagrimaFenix 20) `shouldBe` (-20)
-
-        it "Calcula el daño de SectumSempra para salud > 10" $ 
-            danio harry (SectumSempra 15) `shouldBe` 10
+            danio prueba (lagrimaFenix 20) `shouldBe` (-20)
 
     -- 2c
     describe "diferenciaDePoder" $ do
         it "Calcula la diferencia de poder entre dos magos" $ 
-            diferenciaDePoder harry luis `shouldBe` 130
+            diferenciaDePoder prueba luis `shouldBe` 70
 
     -- 3a
     describe "hayMagoSinHechizos" $ do
@@ -38,11 +35,41 @@ main = hspec $ do
         it "Verifica que no todos los magos viejos son ñoños" $ 
             sonTodosViejosNionios academiaEjemplo `shouldBe` False
 
+--4 a
+    describe "f" $ do
+        it "debe devolver el único elemento de una lista con un solo valor" $ 
+            f length ["a"] `shouldBe` "a"
+        
+        it "debe devolver el valor con la mayor longitud cuando comparamos strings por longitud" $ 
+            f length ["abc", "a", "ab"] `shouldBe` "abc"
+        
+        it "debe devolver el primer valor si ambos son iguales según la comparación" $ 
+            f length ["abc", "def"] `shouldBe` "abc"
+        
+        it "debe devolver el mayor número según la función de comparación" $ 
+            f id [1, 5, 3, 2] `shouldBe` 5
+        
+        it "debe funcionar correctamente en una lista con más de dos elementos" $ 
+            f length ["a", "bc", "def"] `shouldBe` "def"
+
+    
+    describe "valorMaximo" $ do
+        it "debe devolver el único valor de una lista de un solo elemento" $ 
+            valorMaximo id [5] `shouldBe` 5
+
+        it "debe devolver el valor máximo según la función de comparación" $ 
+            valorMaximo id [3, 5, 2, 8, 1] `shouldBe` 8
+
+        it "debe funcionar correctamente con una función de comparación como longitud de cadenas" $ 
+            valorMaximo length ["a", "ab", "abc", "abcd"] `shouldBe` "abcd"
+
+    -- b
+   
     --5
 
     describe "noPuedeGanarle" $ do
         it "El segundo mago no puede ganarle al primero si la salud del primer mago sigue siendo la misma" $ 
-            noPuedeGanarle ron hermione `shouldBe` True
+            noPuedeGanarle ron hermione `shouldBe` False
 
         it "El segundo mago puede ganarle al primero si la salud del primero cambia" $ 
             noPuedeGanarle ron luis `shouldBe` False
