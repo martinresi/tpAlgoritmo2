@@ -1,5 +1,5 @@
 import Test.Hspec
-import Lib (Mago,Hechizo,show, lagrimaFenix,sectumSempra,obliviate,confundus, poder,prueba, f, danio, diferenciaDePoder, luis,ron, hermione, academiaEjemplo, academiaEjemplo2, academiaEjemplo3,  hayMagoSinHechizos, sonTodosViejosNionios, noPuedeGanarle, valorMaximo, mejorHechizoContra, mejorOponente)
+import Lib (Mago,Hechizo,show, lagrimaFenix,sectumSempra,obliviate, fede, confundus, poder, f, danio, diferenciaDePoder, luis,ron, hermione, academiaEjemplo, academiaEjemplo2, academiaEjemplo3,  hayMagoSinHechizos, sonTodosViejosNionios, noPuedeGanarle, valorMaximo, mejorHechizoContra, mejorOponente)
 
 main :: IO ()
 main = hspec $ do
@@ -7,17 +7,17 @@ main = hspec $ do
     -- 2a
     describe "poder" $ do
         it "Calcula el poder de un mago con hechizos" $ 
-            poder prueba `shouldBe` 170
+            poder fede `shouldBe` 120
   
     -- 2b
     describe "danio" $ do
         it "Calcula el daño de LagrimaFenix según lagrimaFenixSalud" $ 
-            danio prueba (lagrimaFenix 20) `shouldBe` (-20)
+            danio fede (lagrimaFenix 20) `shouldBe` (-20)
 
     -- 2c
     describe "diferenciaDePoder" $ do
         it "Calcula la diferencia de poder entre dos magos" $ 
-            diferenciaDePoder prueba luis `shouldBe` 70
+            diferenciaDePoder fede luis `shouldBe` 120
 
     -- 3a
     describe "hayMagoSinHechizos" $ do

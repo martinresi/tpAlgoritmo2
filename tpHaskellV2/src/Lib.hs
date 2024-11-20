@@ -100,9 +100,6 @@ obliviate n mago = mago { hechizos = drop n (hechizos mago) }
 confundus :: Hechizo
 confundus mago
     | length (hechizos mago) == 0 = error "El mago no tiene hechizos"
---    | otherwise            = (head (hechizos mago)) mago
--- no logramos hacer que tome el primer hechizo, nos pide utilizar librerias y funciones que no se vio en la cursada
--- asi que por el momento usaremos esto hasta resolver el problema
     | otherwise            = mago {salud = max 0 (salud mago - 5)}
 
 --2
