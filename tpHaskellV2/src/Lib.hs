@@ -78,13 +78,11 @@ academiaEjemplo2 =
     ]
 
 academiaEjemplo3 = 
-    [ Mago 
-        {   nombre = "OldMago", 
-            edad = 50, 
-            salud = 100, 
-            hechizos = replicate 200 confundus 
-        }
-    ]
+    [ Mago { nombre = "Marcus", edad = 50, salud = 100, hechizos = replicate 200 confundus }, 
+    Mago { nombre = "Rosalinda", edad = 50, salud = 100, hechizos = replicate 200 confundus },
+    Mago { nombre = "OldMago", edad = 50, salud = 100, hechizos = replicate 200 confundus },
+    Mago { nombre = "OldMago", edad = 50, salud = 100, hechizos = replicate 200 confundus },
+    Mago { nombre = "OldMago", edad = 50, salud = 100, hechizos = replicate 200 confundus }]
 
 lagrimaFenix :: Int -> Hechizo
 lagrimaFenix cantidad mago = mago { salud = salud mago + cantidad }
