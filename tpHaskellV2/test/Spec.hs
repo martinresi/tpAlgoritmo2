@@ -18,14 +18,18 @@ main = hspec $ do
             salud (sectumSempra mark) `shouldBe` 5
 
     describe "obliviate" $ do
-        --it "Elimina los primeros n hechizos del mago" $
-            --hechizos (obliviate 1 luis) `shouldBe` [lagrimaFenix 50]
-
-        --it "Elimina todos los hechizos si n es igual a la cantidad de hechizos" $
-            --hechizos (obliviate 10 mark) `shouldBe` []
 
         it "No elimina ningún hechizo si n es 0" $
             hechizos (obliviate 0 ron) `shouldBe` [confundus]
+
+        it "Elimina los primeros n hechizos del mago" $
+            length (hechizos (obliviate 1 luis)) shouldBe 1
+
+        it "Elimina todos los hechizos si n es igual a la cantidad de hechizos" $
+            length (hechizos (obliviate 10 mark)) shouldBe 0
+
+        it "No elimina ningún hechizo si n es 0" $
+            length (hechizos (obliviate 0 ron)) shouldBe 1
 
     describe "confundus" $ do
         it "Hechizo que reduce la salud del mago en 5 si tiene al menos un hechizo" $

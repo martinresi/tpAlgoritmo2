@@ -4,7 +4,7 @@ module Lib
     hayMagoSinHechizos, 
     sonTodosViejosNionios, f, valorMaximo, mejorHechizoContra,
     mejorOponente, noPuedeGanarle, academiaEjemplo,academiaEjemplo2, academiaEjemplo3,
-    ron, hermione, fede, show, salud,
+    ron, hermione, fede, show, salud, hechizos,
     Mago, Hechizo, lagrimaFenix,confundus,obliviate,sectumSempra, academiaEjemploA, 
     academiaEjemplo4, mark, valeria, juan, lautaro, rodrigo, academiaEjemplo5, voldemore
     ) where
