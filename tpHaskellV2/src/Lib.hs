@@ -6,7 +6,7 @@ module Lib
     mejorOponente, noPuedeGanarle, academiaEjemplo,academiaEjemplo2, academiaEjemplo3,
     ron, hermione, fede, show,
     Mago, Hechizo, lagrimaFenix,confundus,obliviate,sectumSempra, academiaEjemploA, 
-    academiaEjemplo4, mark, valeria, juan, lautaro, rodrigo, academiaEjemplo5
+    academiaEjemplo4, mark, valeria, juan, lautaro, rodrigo, academiaEjemplo5, voldemore
     ) where
 
 
@@ -30,7 +30,10 @@ instance Show Mago where
         ", edad = " ++ show edad ++
         ", salud = " ++ show salud ++ " }"
 
-
+instance Eq Mago where
+    (Mago n1 s1 e1 _) == (Mago n2 s2 e2 _) =
+        n1 == n2 && s1 == s2 && e1 == e2
+   
 fede = Mago { 
     nombre = "prueba", 
     edad = 70,

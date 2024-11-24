@@ -1,5 +1,5 @@
 import Test.Hspec
-import Lib (Mago,Hechizo,show, lagrimaFenix, academiaEjemplo5, sectumSempra,obliviate, fede, confundus, poder, f, danio, diferenciaDePoder, luis,ron, hermione, academiaEjemplo, academiaEjemplo2, academiaEjemplo3,  hayMagoSinHechizos, sonTodosViejosNionios, noPuedeGanarle, valorMaximo, mejorHechizoContra, mejorOponente, academiaEjemploA, academiaEjemplo4, mark, valeria, juan, lautaro, rodrigo)
+import Lib (Mago,Hechizo,show, lagrimaFenix,voldemore, academiaEjemplo5, sectumSempra,obliviate, fede, confundus, poder, f, danio, diferenciaDePoder, luis,ron, hermione, academiaEjemplo, academiaEjemplo2, academiaEjemplo3,  hayMagoSinHechizos, sonTodosViejosNionios, noPuedeGanarle, valorMaximo, mejorHechizoContra, mejorOponente, academiaEjemploA, academiaEjemplo4, mark, valeria, juan, lautaro, rodrigo)
 
 main :: IO ()
 main = hspec $ do
@@ -67,11 +67,11 @@ main = hspec $ do
             valorMaximo length ["a", "ab", "abc", "abcd"] `shouldBe` "abcd"
 
     -- b
-        describe "mejorOponente" $ do
-      it "Se coloca un mago debil y verifica quien de la academia posee mas poder que él" $
+    describe "mejorOponente" $ do
+        it "Se coloca un mago debil y verifica quien de la academia posee mas poder que él" $
             mejorOponente fede academiaEjemplo5 `shouldBe` hermione
 
-      it "Se coloca un mago poderoso y verifica con quien de la academia posee una mayor diferencia de poder" $
+        it "Se coloca un mago poderoso y verifica con quien de la academia posee una mayor diferencia de poder" $
             mejorOponente voldemore academiaEjemplo4 `shouldBe` mark
     --5
 
