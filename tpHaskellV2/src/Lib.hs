@@ -57,32 +57,23 @@ hermione = Mago {
     }
 
 
-academiaEjemplo5 = [luis, hermione]
+academiaEjemplo = [ Mago {nombre = "Hagrid", edad = 40, salud = 100, hechizos = [] }]
 
-academiaEjemplo = 
-  [ Mago 
-      { nombre = "Hagrid", 
-        edad = 40, 
-        salud = 100, 
-        hechizos = [] 
-      }
-  ]
+academiaEjemploA = [ Mago {nombre = "Hagrid", edad = 40, salud = 100, hechizos = [sectumSempra, lagrimaFenix 20] }]
 
 academiaEjemplo2 = 
-    [ Mago 
-        {   nombre = "Dumbledore", 
-            edad = 100, 
-            salud = 100, 
-            hechizos = [confundus] 
-        }
-    ]
+    [ Mago { nombre = "Dumbledore", edad = 100, salud = 100, hechizos = [confundus]},
+      Mago { nombre = "Marcus", edad = 100, salud = 100, hechizos = [] },
+      Mago { nombre = "Leticia", edad = 100, salud = 100, hechizos = [sectumSempra, lagrimaFenix 20]}]
 
 academiaEjemplo3 = 
-    [ Mago { nombre = "Marcus", edad = 50, salud = 100, hechizos = replicate 200 confundus }, 
-    Mago { nombre = "Rosalinda", edad = 50, salud = 100, hechizos = replicate 200 confundus },
+    [ Mago { nombre = "OldMago", edad = 50, salud = 100, hechizos = replicate 200 confundus }, 
+    Mago { nombre = "OldMago", edad = 50, salud = 100, hechizos = replicate 200 confundus },
     Mago { nombre = "OldMago", edad = 50, salud = 100, hechizos = replicate 200 confundus },
     Mago { nombre = "OldMago", edad = 50, salud = 100, hechizos = replicate 200 confundus },
     Mago { nombre = "OldMago", edad = 50, salud = 100, hechizos = replicate 200 confundus }]
+
+academiaEjemplo5 = [luis, hermione]
 
 lagrimaFenix :: Int -> Hechizo
 lagrimaFenix cantidad mago = mago { salud = salud mago + cantidad }
