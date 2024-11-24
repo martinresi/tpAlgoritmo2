@@ -24,6 +24,9 @@ main = hspec $ do
         it "Verifica si hay un mago llamado Hagrid sin hechizos en la academia" $ 
             hayMagoSinHechizos academiaEjemplo `shouldBe` True
 
+        it "Verifica si hay un mago llamado Hagrid con hechizos en la academia" $ 
+            hayMagoSinHechizos academiaEjemploA `shouldBe` False
+        
         it "Verifica si no hay un mago llamado Hagrid sin hechizos en la academia" $ 
             hayMagoSinHechizos academiaEjemplo2 `shouldBe` False
 
