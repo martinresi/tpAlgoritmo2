@@ -56,6 +56,23 @@ hermione = Mago {
     salud = 80, 
     hechizos = [obliviate 10, confundus]
     }
+    
+voldemore = Mago { 
+    nombre = "Voldemore", 
+    edad = 120, 
+    salud = 250, 
+    hechizos = replicate 200 confundus
+    }
+
+mark = Mago { nombre = "Mark", edad = 50, salud = 100, hechizos = replicate 10 confundus }
+
+valeria = Mago { nombre = "Valeria", edad = 25, salud = 120, hechizos = replicate 50 sectumSempra }
+
+juan = Mago { nombre = "Juan", edad = 63, salud = 150, hechizos = replicate 100 confundus }
+
+lautaro = Mago { nombre = "Lautaro", edad = 37, salud = 110, hechizos = replicate 60 (lagrimaFenix 20) }
+
+rodrigo = Mago { nombre = "Rodrigo", edad = 82, salud = 200, hechizos = replicate 75 confundus }
 
 
 academiaEjemplo = [ Mago {nombre = "Hagrid", edad = 40, salud = 100, hechizos = [] }]
