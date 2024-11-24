@@ -5,7 +5,7 @@ module Lib
     sonTodosViejosNionios, f, valorMaximo, mejorHechizoContra,
     mejorOponente, noPuedeGanarle, academiaEjemplo,academiaEjemplo2, academiaEjemplo3,
     ron, hermione, fede, show,
-    Mago, Hechizo, lagrimaFenix,confundus,obliviate,sectumSempra, academiaEjemploA
+    Mago, Hechizo, lagrimaFenix,confundus,obliviate,sectumSempra, academiaEjemploA, academiaEjemplo4
     ) where
 
 
