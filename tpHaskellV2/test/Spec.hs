@@ -36,7 +36,7 @@ main = hspec $ do
             sonTodosViejosNionios academiaEjemplo3 `shouldBe` True
 
         it "Verifica que no todos los magos viejos son ñoños" $ 
-            sonTodosViejosNionios academiaEjemplo `shouldBe` False
+            sonTodosViejosNionios academiaEjemplo4 `shouldBe` False
 
 --4 a
     describe "f" $ do
