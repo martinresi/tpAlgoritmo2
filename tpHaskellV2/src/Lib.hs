@@ -67,7 +67,7 @@ voldemore = Mago {
     hechizos = replicate 200 confundus
     }
 
-mark = Mago { nombre = "Mark", edad = 50, salud = 100, hechizos = replicate 10 confundus }
+mark = Mago { nombre = "Mark", edad = 50, salud = 10, hechizos = replicate 10 confundus }
 
 valeria = Mago { nombre = "Valeria", edad = 25, salud = 120, hechizos = replicate 50 sectumSempra }
 
