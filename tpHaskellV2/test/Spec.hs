@@ -77,7 +77,7 @@ main = hspec $ do
 
     describe "noPuedeGanarle" $ do
         it "El segundo mago no puede ganarle al primero si la salud del primer mago sigue siendo la misma" $ 
-            noPuedeGanarle ron hermione `shouldBe` False
+            noPuedeGanarle luis fede `shouldBe` True
 
         it "El segundo mago puede ganarle al primero si la salud del primero cambia" $ 
             noPuedeGanarle ron luis `shouldBe` False
