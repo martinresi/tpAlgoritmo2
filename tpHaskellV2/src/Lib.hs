@@ -3,8 +3,8 @@ module Lib
     poder, danio, diferenciaDePoder, 
     hayMagoSinHechizos, 
     sonTodosViejosNionios, f, valorMaximo, mejorHechizoContra,
-    mejorOponente, noPuedeGanarle, academiaEjemplo,academiaEjemplo2, academiaEjemplo3,
-    ron, hermione, fede, show,
+    mejorOponente, noPuedeGanarle, academiaEjemplo,academiaEjemplo2, academiaEjemplo3, academiaEjemplo4, academiaEjemplo5,academiaEjemploA,
+    ron, hermione, fede, show, voldemore, salud,
     Mago, Hechizo, lagrimaFenix,confundus,obliviate,sectumSempra, hechizos, mark
     ) where
 
