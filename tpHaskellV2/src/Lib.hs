@@ -73,12 +73,7 @@ academiaEjemplo3 =
     Mago { nombre = "Letme", edad = 37, salud = 110, hechizos = replicate 120 (lagrimaFenix 20) },
     Mago { nombre = "Rock", edad = 82, salud = 200, hechizos = replicate 250 confundus }]
 
-academiaEjemplo4 = 
-    [ Mago { nombre = "Mark", edad = 50, salud = 100, hechizos = replicate 10 confundus }, 
-    Mago { nombre = "Valeria", edad = 25, salud = 120, hechizos = replicate 50 sectumSempra },
-    Mago { nombre = "Juan", edad = 63, salud = 150, hechizos = replicate 100 confundus },
-    Mago { nombre = "Lautaro", edad = 37, salud = 110, hechizos = replicate 60 (lagrimaFenix 20) },
-    Mago { nombre = "Rodrigo", edad = 82, salud = 200, hechizos = replicate 75 confundus }]
+academiaEjemplo4 = [mark, valeria, juan, lautaro, rodrigo]
 
 academiaEjemplo5 = [luis, hermione]
 
