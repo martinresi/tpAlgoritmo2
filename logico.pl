@@ -67,11 +67,14 @@ plantas_companeras(rose, bamboo).
 % Ahora debemos agregar las pistas obtenidas durante las observaciones. Por ejemplo:
  
 
-% pista(arbol_rojo, tipo(arbusto)).
-% pista(arbol_rojo, altura(media)).
+pista(arbol_rojo, tipo(arbusto)).
+pista(arbol_rojo, altura(media)).
 
 % Queremos relacionar una planta y un observador solo si todas las pistas que tiene el observador son características de la planta. 
 % En este punto no se puede usar findall.
 
+relacionPistaObservador(Planta, Observador) :-
+    planta(Planta, _), pista(Observador, _),  
+    forall(pista(Observador, Caracteristica), planta(Planta, Caracteristica)).
 % Finalmente, queremos saber si una planta está atrayendo más visitas que su compañera. Para ello, la cantidad de pistas que cumple 
 % debe ser mayor que la de las plantas compañeras.
