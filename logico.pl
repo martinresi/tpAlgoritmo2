@@ -68,6 +68,8 @@ tiene_color(Planta, Color) :- planta(Planta, color(Color)).
 
 
 % 3. Se necesita conocer el conjunto de todas las plantas que son cortas y de tipo flor.
+
+flor_corta(Planta) :- planta(Planta, tipo(flor)), planta(Planta, altura(corta)).
  
 % Ahora debemos agregar las pistas obtenidas durante las observaciones. Por ejemplo:
 
