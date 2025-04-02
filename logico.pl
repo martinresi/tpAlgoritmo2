@@ -56,25 +56,30 @@ plantas_companeras(rose, bamboo).
 
 % Queremos poder preguntar sobre nuestras plantas si: a. Son de tipo arbusto. b. Florecen en primavera. c. Tienen un color específico.
 
-% Sabemos que: a. Las plantas que son arbustos y florecen en verano deben tener un sistema de riego especial. 
+% 1. Sabemos que: a. Las plantas que son arbustos y florecen en verano deben tener un sistema de riego especial. 
 % b. Las plantas rojas o amarillas atraen más insectos benéficos. c. Las plantas que no son de tipo flor son consideradas altas.
 
-% Realizar el predicado que nos permita agregar este conocimiento y el punto 1 no deba modificarse.
+es_arbusto(Planta) :- planta(Planta, tipo(arbusto)).
+florece_en_primavera(Planta) :- planta(Planta, epoca(floracion, primavera)).
+tiene_color(Planta, Color) :- planta(Planta, color(Color)).
 
 
-% Se necesita conocer el conjunto de todas las plantas que son cortas y de tipo flor.
+% 2. Realizar el predicado que nos permita agregar este conocimiento y el punto 1 no deba modificarse.
+
+
+% 3. Se necesita conocer el conjunto de todas las plantas que son cortas y de tipo flor.
  
 % Ahora debemos agregar las pistas obtenidas durante las observaciones. Por ejemplo:
- 
 
 pista(arbol_rojo, tipo(arbusto)).
 pista(arbol_rojo, altura(media)).
 
-% Queremos relacionar una planta y un observador solo si todas las pistas que tiene el observador son características de la planta. 
+% 4. Queremos relacionar una planta y un observador solo si todas las pistas que tiene el observador son características de la planta. 
 % En este punto no se puede usar findall.
 
 relacionPistaObservador(Planta, Observador) :-
     planta(Planta, _), pista(Observador, _),  
     forall(pista(Observador, Caracteristica), planta(Planta, Caracteristica)).
-% Finalmente, queremos saber si una planta está atrayendo más visitas que su compañera. Para ello, la cantidad de pistas que cumple 
+    
+%  5. Finalmente, queremos saber si una planta está atrayendo más visitas que su compañera. Para ello, la cantidad de pistas que cumple 
 % debe ser mayor que la de las plantas compañeras.
