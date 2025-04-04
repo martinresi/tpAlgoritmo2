@@ -13,6 +13,12 @@
 
 :-end_tests(punto1).
 
+:- begin_tests(punto3).
+
+    test('lily, orchid, y tulip son plantas de tipo flor y cortas', set(Planta == [lily, orchid, tulip] )  ):- flor_corta(Planta).
+    test('rose es tipo arbusto y altura media', fail):- flor_corta(rose).
+
+:- end_tests(punto3).
 
 :-begin_tests(punto4).
 
