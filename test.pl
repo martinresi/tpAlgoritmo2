@@ -27,3 +27,15 @@
 
 :-end_tests(punto4).
 
+:- begin_tests(punto5).
+
+    test('rose atrae más visitas que bamboo') :-
+        atrae_mas_visitas(rose).
+
+    test('tulip no atrae más visitas que sunflower', fail) :-
+        atrae_mas_visitas(tulip).
+
+     test('inversibilidad de atrae_mas_visitas', set(Planta == [rose, orchid])) :-
+        atrae_mas_visitas(Planta).
+        
+:- end_tests(punto5)
