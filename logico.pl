@@ -85,3 +85,16 @@ relacionPistaObservador(Planta, Observador) :-
     
 %  5. Finalmente, queremos saber si una planta está atrayendo más visitas que su compañera. Para ello, la cantidad de pistas que cumple 
 % debe ser mayor que la de las plantas compañeras.
+
+% Cuenta cuántas pistas cumple una planta
+cantidad_pistas_que_cumple(Planta, Cantidad) :-
+    findall(Caracteristica, (pista(_, Caracteristica), planta(Planta, Caracteristica)), Lista),
+    length(Lista, Cantidad).
+
+% Planta que atrae más visitas que su compañera
+atrae_mas_visitas(Planta) :-
+    plantas_companeras(Planta, Companera),
+    cantidad_pistas_que_cumple(Planta, Cant1),
+    cantidad_pistas_que_cumple(Companera, Cant2),
+    Cant1 > Cant2.
+
