@@ -76,7 +76,7 @@ atrae_insectos_beneficos(Planta) :- planta(Planta, color(amarillo)).
 
 % c. Plantas que no son de tipo flor son consideradas altas
 
-es_alta(Planta) :- planta(Planta, tipo(Tipo)), Tipo = flor.
+es_alta(Planta) :- planta(Planta, tipo(Tipo)), Tipo \= flor.
 
 % 3. Se necesita conocer el conjunto de todas las plantas que son cortas y de tipo flor.
 
