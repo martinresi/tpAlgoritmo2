@@ -13,6 +13,22 @@
 
 :-end_tests(punto1).
 
+:-begin_tests(punto2).
+    
+    test('no hay ninguna planta que necesite riego especial', fail):- riego_especial(Planta).
+
+    test('solo las plantas rojas y amarillas atraen mas insectos beneficos', set(Planta == [rose, tulip, sunflower])):- 
+        atrae_insectos_beneficos(Planta).
+    test('solo las plantas rojas y amarillas atraen mas insectos beneficos', fail):-
+        atrae_insectos_beneficos(bamboo).
+    
+    test('las plantas que no son de tipo flor son consideradas altas', set(Planta == [bamboo, fern, ivy, rose, cactus])):-
+        es_alta(Planta).
+    test('las plantas que no son de tipo flor son consideradas altas', fail):-
+        es_alta(lily).
+
+:-end_tests(punto2).
+
 :- begin_tests(punto3).
 
     test('lily, orchid, y tulip son plantas de tipo flor y cortas', set(Planta == [lily, orchid, tulip] )  ):- flor_corta(Planta).
