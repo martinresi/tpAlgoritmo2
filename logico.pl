@@ -89,17 +89,20 @@ pista(arbol_rojo, altura(media)).
 
 % 4. Queremos relacionar una planta y un observador solo si todas las pistas que tiene el observador son características de la planta. 
 % En este punto no se puede usar findall.
-
+% la funcion distinct fue sacada de la pagina oficial de Prolog y lo que hace es eliminar repetidos de una lista
 relacionPistaObservador(Planta, Observador) :-
-    planta(Planta, _), pista(Observador, _),  
-    forall(pista(Observador, Caracteristica), planta(Planta, Caracteristica)).
-    
+    once((planta(Planta, _),
+        pista(Observador, _),
+        forall(pista(Observador, Caracteristica),
+               planta(Planta, Caracteristica)))).
+            
 %  5. Finalmente, queremos saber si una planta está atrayendo más visitas que su compañera. Para ello, la cantidad de pistas que cumple 
 % debe ser mayor que la de las plantas compañeras.
 
 % Cuenta cuántas pistas cumple una planta
 cantidad_pistas_que_cumple(Planta, Cantidad) :-
-    findall(Caracteristica, (pista(_, Caracteristica), planta(Planta, Caracteristica)), Lista),
+    planta(Planta,_),
+    findall(Caracteristica, (planta(Planta, Caracteristica),pista(_, Caracteristica)), Lista),
     length(Lista, Cantidad).
 
 % Planta que atrae más visitas que su compañera
