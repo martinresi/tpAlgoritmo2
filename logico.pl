@@ -80,7 +80,8 @@ es_alta(Planta) :- planta(Planta, tipo(Tipo)), Tipo \= flor.
 
 % 3. Se necesita conocer el conjunto de todas las plantas que son cortas y de tipo flor.
 
-flor_corta(Planta) :- planta(Planta, tipo(flor)), planta(Planta, altura(corta)).
+flor_corta(Plantas) :- findall(Planta, (planta(Planta, tipo(flor)), planta(Planta, altura(corta))), Lista),
+list_to_set(Lista, Plantas).
  
 % Ahora debemos agregar las pistas obtenidas durante las observaciones. Por ejemplo:
 
