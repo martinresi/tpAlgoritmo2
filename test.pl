@@ -15,7 +15,7 @@
 
 :-begin_tests(punto2).
     
-    test('no hay ninguna planta que necesite riego especial', fail):- riego_especial(rose).
+    test('ninguna planta actual necesita riego especial', fail):- riego_especial(_).
 
     test('solo las plantas rojas y amarillas atraen mas insectos beneficos', set(Planta == [rose, tulip, sunflower])):- 
         atrae_insectos_beneficos(Planta).
