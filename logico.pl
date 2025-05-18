@@ -67,7 +67,7 @@ tiene_color(Planta, Color) :- planta(Planta, color(Color)).
 % 2. Realizar el predicado que nos permita agregar este conocimiento y el punto 1 no deba modificarse.
 % a. Sistema de riego especial
 
-riego_especial(Planta) :- es_arbusto(Planta), planta(Planta, epoca(floracion, verano)).
+riego_especial(Planta) :- planta(Planta, tipo(arbusto)), planta(Planta, epoca(floracion, verano)).
 
 % b. Atracción de insectos benéficos
 
