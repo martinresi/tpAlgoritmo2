@@ -1,7 +1,7 @@
 % Jardín Botánico Virtual
 
 % Has sido encargado de desarrollar una base de conocimiento para un jardín botánico virtual. La idea del proyecto es que los usuarios puedan hacer consultas sobre las plantas del jardín. A continuación, se ofrece una base de datos inicial:
-
+:- discontiguous planta/2. % se coloca esto porque hay definiciones de planta separadas
 planta(rose, color(rojo)).
 planta(rose, altura(media)).
 planta(rose, epoca(floracion, primavera)).
@@ -66,17 +66,18 @@ tiene_color(Planta, Color) :- planta(Planta, color(Color)).
 
 % 2. Realizar el predicado que nos permita agregar este conocimiento y el punto 1 no deba modificarse.
 % a. Sistema de riego especial
-
-riego_especial(Planta) :- planta(Planta, tipo(arbusto)), planta(Planta, epoca(floracion, verano)).
+planta(Planta,caracteristica(riegoEspecial)):- 
+    planta(Planta, tipo(arbusto)), planta(Planta, epoca(floracion, verano)).
 
 % b. Atracción de insectos benéficos
-
-atrae_insectos_beneficos(Planta) :- planta(Planta, color(rojo)).
-atrae_insectos_beneficos(Planta) :- planta(Planta, color(amarillo)).
+planta(Planta,caracteristica(atraeMasInsectos)):-
+    planta(Planta,color(amarillo)).
+planta(Planta,caracteristica(atraeMasInsectos)):-
+    planta(Planta,color(rojo)).
 
 % c. Plantas que no son de tipo flor son consideradas altas
-
-es_alta(Planta) :- planta(Planta, tipo(Tipo)), Tipo \= flor.
+planta(Planta,caracteristica(esAlta)):-
+    planta(Planta,tipo(Tipo)),Tipo \= flor.
 
 % 3. Se necesita conocer el conjunto de todas las plantas que son cortas y de tipo flor.
 

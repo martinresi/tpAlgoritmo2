@@ -15,17 +15,20 @@
 
 :-begin_tests(punto2).
     
-    test('ninguna planta actual necesita riego especial', fail):- riego_especial(_).
+test('ninguna planta actual necesita riego especial', fail) :-
+    planta(_, caracteristica(riegoEspecial)).
 
-    test('solo las plantas rojas y amarillas atraen mas insectos beneficos', set(Planta == [rose, tulip, sunflower])):- 
-        atrae_insectos_beneficos(Planta).
-    test('solo las plantas rojas y amarillas atraen mas insectos beneficos', fail):-
-        atrae_insectos_beneficos(bamboo).
+test('solo las plantas rojas y amarillas atraen mas insectos beneficos', set(Planta == [rose, tulip, sunflower])) :-
+    planta(Planta, caracteristica(atraeMasInsectos)).
+
+test('bamboo no atrae mas insectos beneficos', fail) :-
+    planta(bamboo, caracteristica(atraeMasInsectos)).
     
-    test('las plantas que no son de tipo flor son consideradas altas', set(Planta == [bamboo, fern, ivy, rose, cactus])):-
-        es_alta(Planta).
-    test('las plantas que no son de tipo flor son consideradas altas', fail):-
-        es_alta(lily).
+test('las plantas que no son de tipo flor son consideradas altas', set(Planta == [bamboo, fern, ivy, rose, cactus])) :-
+    planta(Planta, caracteristica(esAlta)).
+
+test('lily no es considerada alta', fail) :-
+    planta(lily, caracteristica(esAlta)).
 
 :-end_tests(punto2).
 
