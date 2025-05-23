@@ -66,17 +66,17 @@ tiene_color(Planta, Color) :- planta(Planta, color(Color)).
 
 % 2. Realizar el predicado que nos permita agregar este conocimiento y el punto 1 no deba modificarse.
 % a. Sistema de riego especial
-planta(Planta,caracteristica(riegoEspecial)):- 
+planta(Planta,sistemaRiegoEspecial(riegoEspecial)):- 
     planta(Planta, tipo(arbusto)), planta(Planta, epoca(floracion, verano)).
 
 % b. Atracción de insectos benéficos
-planta(Planta,caracteristica(atraeMasInsectos)):-
+planta(Planta,atraeInsectos(beneficos)):-
     planta(Planta,color(amarillo)).
-planta(Planta,caracteristica(atraeMasInsectos)):-
+planta(Planta,atraeInsectos(beneficos)):-
     planta(Planta,color(rojo)).
 
 % c. Plantas que no son de tipo flor son consideradas altas
-planta(Planta,caracteristica(esAlta)):-
+planta(Planta,plantaAlta(esAlta)):-
     planta(Planta,tipo(Tipo)),Tipo \= flor.
 
 % 3. Se necesita conocer el conjunto de todas las plantas que son cortas y de tipo flor.
