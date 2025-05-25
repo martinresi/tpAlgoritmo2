@@ -76,7 +76,7 @@ planta(Planta,atraeInsectos(beneficos)):-
     planta(Planta,color(rojo)).
 
 % c. Plantas que no son de tipo flor son consideradas altas
-planta(Planta,plantaAlta(esAlta)):-
+planta(Planta,altura(esAlta)):-
     planta(Planta,tipo(Tipo)),Tipo \= flor.
 
 % 3. Se necesita conocer el conjunto de todas las plantas que son cortas y de tipo flor.

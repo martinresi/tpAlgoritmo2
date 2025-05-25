@@ -25,10 +25,10 @@ test('bamboo no atrae mas insectos beneficos', fail) :-
     planta(bamboo, atraeInsectos(beneficos)).
     
 test('las plantas que no son de tipo flor son consideradas altas', set(Planta == [bamboo, fern, ivy, rose, cactus])) :-
-    planta(Planta, plantaAlta(esAlta)).
+    planta(Planta, altura(esAlta)).
 
 test('lily no es considerada alta', fail) :-
-    planta(lily, plantaAlta(esAlta)).
+    planta(lily, altura(esAlta)).
 
 :-end_tests(punto2).
 
