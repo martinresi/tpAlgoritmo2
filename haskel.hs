@@ -1,4 +1,7 @@
---Cada robot tiene un identificador (nombre), un nivel de experiencia, una cantidad de energía y un conjunto de programas (software). A través de estos programas, un robot puede modificar las capacidades de otros robots.
+--Cada robot tiene un identificador (nombre), un nivel de experiencia, 
+--una cantidad de energía y un conjunto de programas (software). 
+--A través de estos programas, un robot puede modificar las capacidades
+-- de otros robots.
 --Ejemplos de programas a implementar:
 --recargarBateria: Este programa recibe un robot y lo recarga, aumentando su energía en una cantidad variable.
 --descargaElectrica: Este programa causa una reducción de energía al robot objetivo: si su energía es mayor a 10, le quita 10 puntos; en caso contrario, reduce su energía a la mitad.
@@ -6,6 +9,32 @@
 --autoAtaque: El robot objetivo se ataca a sí mismo usando su primer programa registrado. Lanzar error si no tiene ningún programa.
 --Funciones a realizar: (2)
 
+type Programa = Robot -> Robot
+
+data Robot = Robot {
+      nombre :: String,
+      nivelExperiencia:: Int,
+      energia :: Int,
+      programas :: [Programa]
+
+}
+
+-- Programas a implementar
+recargaBateria :: Int -> Robot
+recargaBateria n robot = robot {energia = energia robot + n}
+
+descargaElectrica :: Programa
+descargaElectrica robot
+      | energia robot > 10 = robot { energia = energia robot - 10 }
+      | otherwise          = robot { energia = energia robot `div` 2 }
+
+olvidarPrograma :: Programa
+olvidarPrograma n robot = robot{programas = drop n (programas robot)}
+
+autoAtaque :: Programa
+autoAtaque robot
+      | length (programas robot) == 0 = error "no tiene programas"
+      | otherwise                     = (head (programas robot)) robot
 --1
 poder :: Robot -> Int
 
@@ -34,6 +63,31 @@ f x (y1:y2:ys)
       | otherwise = f x (y2 : ys)
 
 --Explica brevemente cuál es su propósito, define su tipo y presenta una versión que sea más expresiva en el paradigma funcional.
+--EXPLICACION:
+
+-- Esta función se utiliza para encontrar el valor más alto o máximo dentro de una lista,
+-- aplicando una función que se pasa como parámetro. Dicha función transforma cada elemento de la lista
+-- y luego compara los resultados para determinar cuál es el mayor.
+-- Al observar el cuerpo de la función, se puede deducir que su objetivo es hallar el valor máximo
+-- entre los elementos de la lista. Para ello, aplica una función (representada por "x")
+-- a cada elemento. Esta función transforma los elementos, y el resultado de cada transformación
+-- se compara para determinar cuál es el más grande.
+
+-- El proceso es recursivo: compara los primeros elementos y luego sigue evaluando
+-- el resto de la lista hasta encontrar el valor máximo.
+
+-- Como se utiliza el operador ">=", podemos inferir que los valores deben ser comparables.
+-- La función recibida como parámetro toma un valor de tipo A y devuelve uno de tipo B,
+-- que debe ser comparable.
+-- La lista contiene elementos del tipo A, ya que son los que se le pasan a la función.
+-- Dado que el caso base retorna un elemento de la lista, el tipo de retorno de la función
+-- también es A.
+
+valorMaximo :: Ord b => (a -> b) -> [a] -> a
+valorMaximo funcion [valor] = valor
+valorMaximo funcion (x : siguiente : xs)
+      | funcion x >= funcion siguiente = valorMaximo funcion (x : xs)
+      | otherwise = valorMaximo funcion (siguiente : xs)
 --Sin definir funciones auxiliares, construye las siguientes:
 --4
 mejorProgramaContra :: Robot -> Robot -> Programa
