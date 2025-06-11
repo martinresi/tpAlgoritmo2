@@ -43,8 +43,11 @@ poder :: Robot -> Int
 daño :: Robot -> Programa -> Int
 
 --Calcula cuánta energía se pierde o gana al aplicar un programa a un robot. La ganancia se indica con un número negativo. La función retorna 0 si no hay cambio.
+
+
 --3
 diferenciaDePoder :: Robot -> Robot -> Int
+diferenciaDePoder r1 r2 = abs (poder r1 - poder r2)
 
 --La diferencia absoluta en poder entre dos robots
 
@@ -53,7 +56,15 @@ diferenciaDePoder :: Robot -> Robot -> Int
 type Academia = [Robot]
 --Representa un conjunto de robots en una organización.
 --Existe en la academia algún robot llamado "Atlas" que actualmente no tenga programas en su software?
+hayRobotSinProgramasLlamado :: String -> Academia -> Bool
+hayRobotSinProgramasLlamado nombreAtlas = any (\robot -> nombre robot == nombreAtlas && null (programas robot))
+
 --Todos los robots viejos (con experiencia mayor a 16) son considerados "obstinados", esto es, que tengan más programas que el triple de su nivel de experiencia?
+esObstinado :: Robot -> Bool
+esObstinado robot = length (programas robot) > 3 * experiencia robot
+
+todosLosViejosSonObstinados :: Academia -> Bool
+todosLosViejosSonObstinados = all esObstinado . filter ((>16) . experiencia)
 
 
 --Sobre la función auxiliar: (4)
