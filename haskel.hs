@@ -37,11 +37,13 @@ autoAtaque robot
       | otherwise                     = (head (programas robot)) robot
 --1
 poder :: Robot -> Int
-
+poder robot = energia robot + (nivelExperiencia robot * length (programas robot))
 --Calcula la fuerza de un robot sumando su energía más el producto de su nivel de experiencia por la cantidad de programas que tiene.
 --2
 daño :: Robot -> Programa -> Int
-
+danio robot programa
+    | energia robot == energia (programa robot) = 0  -- Si no hay cambio en la energía, retornamos 0
+    | otherwise = energia robot - energia (programa robot)
 --Calcula cuánta energía se pierde o gana al aplicar un programa a un robot. La ganancia se indica con un número negativo. La función retorna 0 si no hay cambio.
 
 
