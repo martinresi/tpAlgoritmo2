@@ -63,10 +63,10 @@ hayRobotSinProgramasLlamado nombreAtlas = any (\robot -> nombre robot == nombreA
 
 --Todos los robots viejos (con experiencia mayor a 16) son considerados "obstinados", esto es, que tengan más programas que el triple de su nivel de experiencia?
 esObstinado :: Robot -> Bool
-esObstinado robot = length (programas robot) > 3 * experiencia robot
+esObstinado robot = length (programas robot) > 3 * nivelExperiencia robot
 
 todosLosViejosSonObstinados :: Academia -> Bool
-todosLosViejosSonObstinados = all esObstinado . filter ((>16) . experiencia)
+todosLosViejosSonObstinados = all esObstinado . filter ((>16) . nivelExperiencia)
 
 
 --Sobre la función auxiliar: (4)
@@ -116,5 +116,6 @@ mejorOponente robot academia = foldl1 (\r1 r2 -> if diferenciaDePoder robot r1 >
 --Implementa la función 
 --6
 noPuedeDerrotarle :: Robot -> Robot -> Bool
+noPuedeDerrotarle atacante victima = energia atacante == energia (foldl (\vic pro -> pro vic) victima (programas atacante))
 
 --La condición es que, tras aplicar todos los programas que conoce al segundo robot, la energía del primero quede igual que antes, sin necesidad de usar recursividad.
