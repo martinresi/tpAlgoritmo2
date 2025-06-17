@@ -104,9 +104,11 @@ valorMaximo funcion (x : siguiente : xs)
 --Sin definir funciones auxiliares, construye las siguientes:
 --4
 mejorProgramaContra :: Robot -> Robot -> Programa
+mejorProgramaContra victima atacante = foldl1 (\p1 p2 -> if danio victima p1 > danio victima p2 then p1 else p2) (programas atacante)
 --Elige el programa del segundo robot que cause mayor reducción de energía al primero.
 --5
 mejorOponente :: Robot -> Academia -> Robot
+mejorOponente robot academia = foldl1 (\r1 r2 -> if diferenciaDePoder robot r1 > diferenciaDePoder robot r2 then r1 else r2) academia
 --Encuentra el robot con la mayor diferencia de poder respecto al robot recibido.
 
 --Implementación sin recursividad:
@@ -114,4 +116,5 @@ mejorOponente :: Robot -> Academia -> Robot
 --Implementa la función 
 --6
 noPuedeDerrotarle :: Robot -> Robot -> Bool
+
 --La condición es que, tras aplicar todos los programas que conoce al segundo robot, la energía del primero quede igual que antes, sin necesidad de usar recursividad.
