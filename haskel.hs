@@ -16,11 +16,10 @@ data Robot = Robot {
       nivelExperiencia:: Int,
       energia :: Int,
       programas :: [Programa]
-
-}
+} 
 
 -- Programas a implementar
-recargaBateria :: Int -> Robot
+recargaBateria :: Int -> Programa
 recargaBateria n robot = robot {energia = energia robot + n}
 
 descargaElectrica :: Programa
@@ -28,19 +27,19 @@ descargaElectrica robot
       | energia robot > 10 = robot { energia = energia robot - 10 }
       | otherwise          = robot { energia = energia robot `div` 2 }
 
-olvidarPrograma :: Programa
+olvidarPrograma ::Int -> Programa
 olvidarPrograma n robot = robot{programas = drop n (programas robot)}
 
 autoAtaque :: Programa
 autoAtaque robot
-      | length (programas robot) == 0 = error "no tiene programas"
-      | otherwise                     = (head (programas robot)) robot
+  | length (programas robot) == 0 = error "no tiene programas"
+  | otherwise                     = (head (programas robot)) robot
 --1
 poder :: Robot -> Int
 poder robot = energia robot + (nivelExperiencia robot * length (programas robot))
 --Calcula la fuerza de un robot sumando su energía más el producto de su nivel de experiencia por la cantidad de programas que tiene.
 --2
-daño :: Robot -> Programa -> Int
+danio :: Robot -> Programa -> Int
 danio robot programa
     | energia robot == energia (programa robot) = 0  -- Si no hay cambio en la energía, retornamos 0
     | otherwise = energia robot - energia (programa robot)
@@ -119,3 +118,6 @@ noPuedeDerrotarle :: Robot -> Robot -> Bool
 noPuedeDerrotarle atacante victima = energia atacante == energia (foldl (\vic pro -> pro vic) victima (programas atacante))
 
 --La condición es que, tras aplicar todos los programas que conoce al segundo robot, la energía del primero quede igual que antes, sin necesidad de usar recursividad.
+
+robotEjemplo :: Robot
+robotEjemplo = Robot {nombre = "Matias",nivelExperiencia = 5,energia = 100,programas = [recargaBateria 20, descargaElectrica, autoAtaque] }
